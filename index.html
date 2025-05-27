@@ -9,22 +9,22 @@
 </head>
 
 <body>
-    <p class="classField index_classField"> <font size="5"> <b> Парне програмування! </b> </font> </р>
+    <p class="classField index_classField">
+        <font size="5"> <b> Парне програмування! </b> </font>
+        </р>
 
     <div class="classField index_classField">
         <p class="index_title"> <b> Під'єднатися до кімнати </b> </p>
 
         <p class="index_joinRoomCode"> Код: <input class="inputField" type="text" size="4" maxlength="4"
-            id="joinRoomCodeInput"> <br> </p>
+                id="joinRoomCodeInput"> <br> </p>
 
 
         <p class="index_nickname"> Нікнейм: <input class="inputField" type="text" size="24" maxlength="24"
-            id="nicknameInput"> <br> </p>
+                id="nicknameInput"> <br> </p>
 
-        <div class="index_joinRoomButton">
-            <button class="button" type="button" onclick="JoinRoom()">
-                Приєднатись до кімнати <br>
-        </div>
+        <button class="button" type="button" onclick="JoinRoom()">
+            Приєднатись до кімнати <br>
     </div>
 
     <div class="classField index_classField">
@@ -33,18 +33,16 @@
         <div>
             <span class="index_makeRoomCode"> Код: </span>
             <input class="inputField" type="text" size="4" maxlength="4" id="makeRoomCodeInput">
-            <button class="button" type="button" onclick="MakeRandomRoomCode()" 
-                style="height:100%;">
+            <button class="button" type="button" onclick="MakeRandomRoomCode()" style="height:100%;">
                 Рандомний <br>
         </div>
 
         <p class="index_countOfPlayers"> Кількість людей: <input class="inputField" type="number" size="16"
-            maxlength="16" id="countOfPlayersInput" max="199" min="2"> <br> </p>
+                maxlength="16" id="countOfPlayersInput" max="199" min="2"> <br> </p>
 
-        <div class="index_makeRoomButton">
-            <button class="button" type="button" onclick="MakeRoom()">
-                Зробити кімнату <br>
-        </div>
+        <button class="button" type="button" onclick="MakeRoom()">
+            Зробити кімнату <br>
+
     </div>
 
     <div class="classField index_classField">

@@ -5,7 +5,7 @@ const API = 'https://sitebackend-ebr5.onrender.com/data';
 
 function PopUpWindowOfError(errorType) {
     let errorBox = document.createElement("div");
-    errorBox.setAttribute('class', 'index_errorBox classField');
+    errorBox.setAttribute('class', 'classField index_errorBox');
 
     let closeButton = document.createElement("button");
     closeButton.innerHTML = `<svg
@@ -20,7 +20,7 @@ function PopUpWindowOfError(errorType) {
     fill="currentColor"
   />
 </svg>`;
-    closeButton.setAttribute('class', 'index_errorBoxButton button');
+    closeButton.setAttribute('class', 'button index_errorBoxButton');
     closeButton.onclick = function () {
         errorBox.remove();
     };

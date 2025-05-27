@@ -1,3 +1,7 @@
+:root {
+    --color_class: 46, 46, 62;
+}
+
 * {
     font-family: 'JetBrains Mono', monospace;
 }
@@ -10,7 +14,7 @@ body {
 }
 
 .classField {
-    background-color: #2E2E3E;
+    background-color: rgba(var(--color_class), 0.7);
     backdrop-filter: blur(10px);
     border-radius: 30px;
 
@@ -126,6 +130,9 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .index_errorBox {
     z-index: 10;
+
+    background-color: rgba(var(--color_class), 1);
+
     width: 150px;
     height: 100px;
 
@@ -136,6 +143,8 @@ input[type="number"]::-webkit-inner-spin-button {
 
     align-items: center;
     padding: 10px;
+
+    backdrop-filter: blur(0px);
 }
 
 .index_errorBoxButton {
