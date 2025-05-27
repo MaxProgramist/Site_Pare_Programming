@@ -1,6 +1,111 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: #1E1E2E;
+    color: #EAEAEA;
+}
+
+.classField {
+    background-color: #2E2E3E46;
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+
+    width: max(30vw,300px);
+
+    align-items: center;
+    text-align: center;
+
+    transform: translateX(calc(50vw - 50%));
+    
+    margin: 10px;
+    padding: 15px;
+}
+
+.inputField {
+    background-color: #42445A;
+    border-radius: 15px;
+    border-color: #00000000;
+
+    align-items: center;
+    text-align: center;
+    
+    margin: 3px;
+    padding: 3px;
+
+    color: #EAEAEA;
+
+    transition: background-color 1s;
+}
+
+.inputField:focus {
+    background-color: #5A6075;
+    outline: none;
+
+    transition: background-color 0.4s;
+}
+
+.inputField_disable {
+    background-color: #6B7280;
+    border-radius: 15px;
+    border-color: #00000000;
+
+    align-items: center;
+    text-align: center;
+    
+    margin: 3px;
+    padding: 3px;
+
+    color: #EAEAEA;
+
+    transition: background-color 1s;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+.button {
+    background-color: #3B82F6;
+    border-radius: 15px;
+    border-color: #00000000;
+
+    align-items: center;
+    text-align: center;
+    
+    margin: 3px;
+    padding: 3px;
+
+    color: #EAEAEA;
+
+    transform: scale(1,1);
+
+    transition: background-color 0.4s, transform 0.4s;
+}
+
+.button:hover {
+    background-color: #60A5FA;
+    outline: none;
+
+    transform: scale(1.15,1.15);
+}
+
+.button_disable {
+    background-color: #6B7280;
+    border-radius: 15px;
+    border-color: #00000000;
+
+    align-items: center;
+    text-align: center;
+    
+    margin: 3px;
+    padding: 3px;
+
+    color: #EAEAEA;
+
+    transition: background-color 1s;
 }
 
 .universal_iconImage {
@@ -318,6 +423,7 @@ body {
     justify-content: center;
     margin: 100px;
 }
+
 
 /*
 Темна тема

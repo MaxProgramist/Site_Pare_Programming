@@ -8,49 +8,54 @@
 </head>
 
 <body>
-    <p class="index_title"> Парне програмування! </p>
+    <p class="index_title classField"> Парне програмування! </p>
 
-    <p class="index_title"> Під'єднатися до кімнати </p>
+    <div class="classField">
+        <p class="index_title"> Під'єднатися до кімнати </p>
 
-    <p class="index_joinRoomCode"> Код: <input class="index_joinRoomCodeInput" type="text" size="4" maxlength="4"
+        <p class="index_joinRoomCode"> Код: <input class="inputField" type="text" size="4" maxlength="4"
             id="joinRoomCodeInput"> <br> </p>
 
 
-    <p class="index_nickname"> Нікнейм: <input class="index_nicknameInput" type="text" size="24" maxlength="24"
+        <p class="index_nickname"> Нікнейм: <input class="inputField" type="text" size="24" maxlength="24"
             id="nicknameInput"> <br> </p>
 
-    <div class="index_joinRoomButton">
-        <button class="index_joinRoomButton" type="button" onclick="JoinRoom()">
-            Приєднатись до кімнати <br>
+        <div class="index_joinRoomButton">
+            <button class="button" type="button" onclick="JoinRoom()">
+                Приєднатись до кімнати <br>
+        </div>
     </div>
 
-    <br>
-    <p class="index_title"> Створити кімнату </p>
+    <div class="classField">
+        <p class="index_title"> Створити кімнату </p>
 
-    <div>
-        <p class="index_makeRoomCode"> Код:
-            <input class="index_makeRoomCodeInput" type="text" size="4" maxlength="4" id="makeRoomCodeInput">
-            <button class="index_makeRandomRoomCodeButton" type="button" onclick="MakeRandomRoomCode()">
+        <div>
+            <span class="index_makeRoomCode"> Код: </span>
+            <input class="inputField" type="text" size="4" maxlength="4" id="makeRoomCodeInput">
+            <button class="button" type="button" onclick="MakeRandomRoomCode()" 
+                style="height:100%;">
                 Рандомний <br>
-        </p>
-    </div>
+        </div>
 
-    <p class="index_countOfPlayers"> Кількість людей: <input class="index_countOfPlayersInput" type="number" size="16"
+        <p class="index_countOfPlayers"> Кількість людей: <input class="inputField" type="number" size="16"
             maxlength="16" id="countOfPlayersInput" max="199" min="2"> <br> </p>
 
-    <div class="index_makeRoomButton">
-        <button class="index_makeRoomButton" type="button" onclick="MakeRoom()">
-            Зробити кімнату <br>
+        <div class="index_makeRoomButton">
+            <button class="button" type="button" onclick="MakeRoom()">
+                Зробити кімнату <br>
+        </div>
     </div>
 
-    <div class="index_wakeUp">
-        <button class="index_wakeUpButton" type="button" onclick="WakeUpServers()">
-            Розбудити сервери <br>
-    </div>
+    <div class="classField">
+        <div class="index_wakeUp">
+            <button class="button" type="button" onclick="WakeUpServers()">
+                Розбудити сервери <br>
+        </div>
 
-    <div class="index_resetButton">
-        <button class="index_resetDevButton" type="button" onclick="ResetData()">
-            Перезапустити <br>
+        <div class="index_resetButton">
+            <button class="button" type="button" onclick="ResetData()">
+                Перезапустити <br>
+        </div>
     </div>
 
     <script src="JSCode/universalJS.js"></script>
