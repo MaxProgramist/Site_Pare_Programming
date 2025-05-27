@@ -1,3 +1,7 @@
+* {
+    font-family: 'JetBrains Mono', monospace;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -6,17 +10,13 @@ body {
 }
 
 .classField {
-    background-color: #2E2E3E46;
+    background-color: #2E2E3E;
     backdrop-filter: blur(10px);
-    border-radius: 15px;
-
-    width: max(30vw,300px);
+    border-radius: 30px;
 
     align-items: center;
     text-align: center;
 
-    transform: translateX(calc(50vw - 50%));
-    
     margin: 10px;
     padding: 15px;
 }
@@ -28,9 +28,9 @@ body {
 
     align-items: center;
     text-align: center;
-    
+
     margin: 3px;
-    padding: 3px;
+    padding: 4px;
 
     color: #EAEAEA;
 
@@ -51,7 +51,7 @@ body {
 
     align-items: center;
     text-align: center;
-    
+
     margin: 3px;
     padding: 3px;
 
@@ -74,13 +74,13 @@ input[type="number"]::-webkit-inner-spin-button {
 
     align-items: center;
     text-align: center;
-    
+
     margin: 3px;
-    padding: 3px;
+    padding: 8px;
 
     color: #EAEAEA;
 
-    transform: scale(1,1);
+    transform: scale(1, 1);
 
     transition: background-color 0.4s, transform 0.4s;
 }
@@ -89,7 +89,9 @@ input[type="number"]::-webkit-inner-spin-button {
     background-color: #60A5FA;
     outline: none;
 
-    transform: scale(1.15,1.15);
+    box-shadow: 0px opx #60A5FA;
+
+    transform: scale(1.15, 1.15);
 }
 
 .button_disable {
@@ -99,7 +101,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
     align-items: center;
     text-align: center;
-    
+
     margin: 3px;
     padding: 3px;
 
@@ -116,9 +118,14 @@ input[type="number"]::-webkit-inner-spin-button {
 
 /* ---------- Index ---------- */
 
+.index_classField {
+    width: max(35vw, 300px);
+
+    transform: translateX(calc(50vw - 50%));
+}
+
 .index_errorBox {
     z-index: 10;
-    background-color: #73eaff;
     width: 150px;
     height: 100px;
 
@@ -127,19 +134,18 @@ input[type="number"]::-webkit-inner-spin-button {
     left: 50vw;
     transform: translateX(-50%);
 
-    align-content: center;
-    text-align: center;
-    padding: 10px 10px 10px 10px;
+    align-items: center;
+    padding: 10px;
 }
 
 .index_errorBoxButton {
     position: absolute;
     top: 1%;
     right: 1%;
-    height: 20px;
-    width: 20px;
-    background: #458c99;
-    border: none;
+    height: 25px;
+    width: 30px;
+
+    padding: 0px;
 }
 
 
@@ -378,7 +384,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .programming_limits {
-    display: inline-block; 
+    display: inline-block;
     background: #c9c9c9;
     border-radius: 10px;
     padding: 10px;
