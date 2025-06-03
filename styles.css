@@ -3,22 +3,22 @@
     --color_class_1: 46, 46, 62;
     --color_class_2: 58, 61, 95;
     --color_text_main: 234, 234, 234;
-    --color_text_addativ: 161, 161, 161;
+    --color_text_additive: 161, 161, 161;
 
     --color_button_main: 59, 130, 246;
     --color_button_hover: 96, 165, 250;
-    --color_button_unactive: 107, 114, 128;
+    --color_button_inactive: 107, 114, 128;
 
     --color_input_main: 66, 68, 90;
     --color_input_hover: 90, 96, 117;
-    --color_input_unactive: 107, 114, 128;
+    --color_input_inactive: 107, 114, 128;
 
     --color_code_error: 248, 113, 113;
     --color_code_correct: 16, 185, 129;
-    --color_code_varible_type: 96, 165, 250;
-    --color_code_varible_string: 167, 243, 208;
-    --color_code_varible_library: 249, 115, 22;
-    --color_code_varible_key_words: 192, 132, 252;
+    --color_code_variable_type: 96, 165, 250;
+    --color_code_variable_string: 167, 243, 208;
+    --color_code_variable_library: 249, 115, 22;
+    --color_code_variable_key_words: 192, 132, 252;
 }
 
 * {
@@ -32,8 +32,20 @@ body {
     color: rgb(var(--color_text_main));
 }
 
-.classField {
+.classField_1 {
     background-color: rgba(var(--color_class_1), 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+
+    align-items: center;
+    text-align: center;
+
+    margin: 10px;
+    padding: 15px;
+}
+
+.classField_2 {
+    background-color: rgb(var(--color_class_2));
     backdrop-filter: blur(10px);
     border-radius: 30px;
 
@@ -55,7 +67,7 @@ body {
     margin: 3px;
     padding: 4px;
 
-    color: #EAEAEA;
+    color: rgb(var(--color_text_main));
 
     transition: background-color 1s;
 }
@@ -68,7 +80,7 @@ body {
 }
 
 .inputField_disable {
-    background-color: rgb(var(--color_input_unactive));
+    background-color: rgb(var(--color_input_inactive));
     border-radius: 15px;
     border-color: #00000000;
 
@@ -115,7 +127,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .button_disable {
-    background-color: rgb(var(--color_button_unactive));
+    background-color: rgb(var(--color_button_inactive));
     border-radius: 15px;
     border-color: #00000000;
 
@@ -125,7 +137,7 @@ input[type="number"]::-webkit-inner-spin-button {
     margin: 3px;
     padding: 3px;
 
-    color: #EAEAEA;
+    color: rgb(var(--color_text_main));
 
     transition: background-color 1s;
 }
@@ -134,6 +146,17 @@ input[type="number"]::-webkit-inner-spin-button {
     width: min(10vw, min(10vh, 60px));
     height: min(10vw, min(10vh, 60px));
     padding: min(1vw, min(1vh, 6px));
+}
+
+.background_shapes {
+    position: absolute;
+    background: rgb(var(--color_input_main));
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+    transition: transform 20s ease-in-out;
 }
 
 /* ---------- Index ---------- */
@@ -154,10 +177,10 @@ input[type="number"]::-webkit-inner-spin-button {
     width: 150px;
     height: 100px;
 
-    position: absolute;
-    top: 10vh;
+    position: fixed;
+    top: 50vh;
     left: 50vw;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
 
     align-items: center;
     padding: 10px;
