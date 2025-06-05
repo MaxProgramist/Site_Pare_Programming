@@ -35,7 +35,7 @@ function PopUpWindowOfError(errorType) {
 const API = 'https://servermanager-plto.onrender.com';
 
 async function SendPost(servername, functionName, arguments) {
-    return JSON.parse(await fetch(`${API}/`, {
+    return (await fetch(`${API}/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -46,14 +46,14 @@ async function SendPost(servername, functionName, arguments) {
 }
 
 async function ResetData() {
-    let res = JSON.parse(await fetch(`${API}/`, {
+    let res = await fetch(`${API}/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             server: servername,
             arguments: { name: "ResetData", arguments: {} }
         })
-    }));
+    });
 
     if (res.status != 200) {
         return PopUpWindowOfError(res.description);
