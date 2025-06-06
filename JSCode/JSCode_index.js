@@ -66,5 +66,4 @@ function RandomString(length) {
 
 async function WakeUpServersButton() {
     await WakeUpServers();
-    return PopUpWindowOfError("No errors :)");
 }

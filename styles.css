@@ -148,34 +148,15 @@ input[type="number"]::-webkit-inner-spin-button {
     padding: min(1vw, min(1vh, 6px));
 }
 
-.background_shapes {
-    position: absolute;
-    background: rgb(var(--color_input_main));
-    border-radius: 20px;
-    backdrop-filter: blur(20px);
-    width: 100px;
-    height: 100px;
-    pointer-events: none;
-    transition: transform 20s ease-in-out;
-}
-
-/* ---------- Index ---------- */
-
-.index_classField {
-    width: max(35vw, 300px);
-
-    transform: translateX(calc(50vw - 50%));
-}
-
-.index_errorBox {
+.popUpBox {
     z-index: 10;
 
     background-color: rgb(var(--color_class_2));
 
     color: rgb(var(--color_text_main));
 
-    width: 150px;
-    height: 100px;
+    width: 35vw;
+    height: 50vh;
 
     position: fixed;
     top: 50vh;
@@ -183,12 +164,20 @@ input[type="number"]::-webkit-inner-spin-button {
     transform: translate(-50%, -50%);
 
     align-items: center;
+    align-content: center;
     padding: 10px;
 
     backdrop-filter: blur(0px);
 }
 
-.index_errorBoxButton {
+.popUpBoxIcon {
+    width: min(35vw, 35vh);
+    height: auto;
+    padding: 10px;
+}
+
+
+.popUpBoxButton {
     position: absolute;
     top: 1%;
     right: 1%;
@@ -198,6 +187,14 @@ input[type="number"]::-webkit-inner-spin-button {
     padding: 0px;
 
     color: rgb(var(--color_text_main));
+}
+
+/* ---------- Index ---------- */
+
+.index_classField {
+    width: max(35vw, 300px);
+
+    transform: translateX(calc(50vw - 50%));
 }
 
 

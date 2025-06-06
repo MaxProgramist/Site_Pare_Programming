@@ -1,9 +1,13 @@
 // * ------------ Universal Functions ------------ //
 // * --------------- Without Server -------------- //
 
-function PopUpWindowOfError(errorType) {
-    let errorBox = document.createElement("div");
-    errorBox.setAttribute('class', 'classField_2 index_errorBox');
+function PopUpWindowOfError(errorType, icon = "./Icons/ErrorIcon.png") {
+    let popUpBox = document.createElement("div");
+    popUpBox.setAttribute('class', 'classField_2 popUpBox');
+
+    let popUpBoxIcon = document.createElement("img");
+    popUpBoxIcon.src = icon;
+    popUpBoxIcon.setAttribute('class', 'popUpBoxIcon');
 
     let closeButton = document.createElement("button");
     closeButton.innerHTML = `
@@ -20,15 +24,16 @@ function PopUpWindowOfError(errorType) {
     />
     </svg>`;
 
-    closeButton.setAttribute('class', 'button index_errorBoxButton');
+    closeButton.setAttribute('class', 'button popUpBoxButton');
     closeButton.onclick = function () {
-        errorBox.remove();
+        popUpBox.remove();
     };
 
-    errorBox.innerHTML += `Error: <br> ${errorType} <br>`;
-    errorBox.appendChild(closeButton);
+    popUpBox.appendChild(popUpBoxIcon);
+    popUpBox.innerHTML += `<br> <font size=6> ${errorType} </font> <br>`;
+    popUpBox.appendChild(closeButton);
 
-    document.body.appendChild(errorBox);
+    document.body.appendChild(popUpBox);
 }
 
 // * ---------------- With Server --------------- //

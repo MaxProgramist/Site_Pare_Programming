@@ -32,4 +32,6 @@ async function WakeUpServers() {
             something: "Wake Up !"
         })
     });
+
+    return PopUpWindowOfError("Servers are awake!", "./Icons/WakeUpIcon.png");
 }
