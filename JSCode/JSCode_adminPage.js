@@ -21,6 +21,9 @@ COUNT_OF_TASKS_INPUT.value = 8;
 let divToPlayer = [];
 let timeForTasksInMinutes = 45;
 
+let currentSetOfTasks = "linear_1";
+let currentGrade = 8;
+
 var currentRoomPlayers = 0;
 
 Loop();
@@ -38,16 +41,16 @@ function Delay(ms) {
 }
 
 async function SomeAsyncFunction() {
-    let payload = await LoadData();
+    let payload = await SendPost("RoomManager", "GetAllPlayers", {roomCode: ROOM_CODE});
 
-    if (payload.roomsCodes.length < 1) window.location.href = "index.html";
+    if (payload.status == 404 && payload.description == "No room with this code!") window.location.href = "index.html";
 
     TIME_FIELD.innerText = timeForTasksInMinutes;
 
     for (let i = 0; i < divToPlayer.length; i++)
         UpdatePlayerSkin(payload, i);
 
-    while (payload.rooms[ROOM_CODE].players.length > currentRoomPlayers) {
+    while (payload.players.length > currentRoomPlayers) {
         NewPlayerIcon(payload, currentRoomPlayers);
         currentRoomPlayers++;
     }
@@ -56,8 +59,8 @@ async function SomeAsyncFunction() {
 function UpdatePlayerSkin(payload, playerIndex) {
     let playerDiv = divToPlayer[playerIndex];
 
-    let playerSkin = payload.rooms[ROOM_CODE].players[playerIndex].skin;
-    let playerName = payload.rooms[ROOM_CODE].players[playerIndex].name;
+    let playerSkin = payload.players[playerIndex].skin;
+    let playerName = payload.players[playerIndex].name;
 
     let imgInsideDiv = playerDiv.querySelector("img");
     let pInsideDiv = playerDiv.querySelector("p");
@@ -74,7 +77,7 @@ function NewPlayerIcon(payload, playerIndex) {
     playerBoxSkinImage.setAttribute('class', 'universal_iconImage');
 
     let playerBoxName = document.createElement("p");
-    playerBoxName.textContent = payload.rooms[ROOM_CODE].players[playerIndex].name;
+    playerBoxName.textContent = payload.players[playerIndex].name;
 
     playerBox.appendChild(playerBoxSkinImage);
     playerBox.appendChild(playerBoxName);
@@ -141,32 +144,23 @@ async function SetOfTasksMenu() {
 
 
 async function ChangeGradeOfRoom(numberOfGrade) {
-    let payload = await LoadData();
-
-    payload.rooms[ROOM_CODE].grade = numberOfGrade;
+    currentSetOfTasks = numberOfGrade;
     GRADE_TEXT_FIELD.innerText = ";  Клас:" + numberOfGrade;
-
-    await SaveData(payload);
 }
 
 async function AddTimeForTasks(timeChanger) {
     if ((timeChanger > 0 && timeForTasksInMinutes < 120) || (timeChanger < 0 && timeForTasksInMinutes > 5))
         timeForTasksInMinutes += timeChanger;
+    TIME_FIELD.innerText = timeForTasksInMinutes;
 }
 
-async function ChangeSetOfTasksOfRoom(numberOfSet) {
-    let payload = await LoadData();
-
-    payload.rooms[ROOM_CODE].numberOfTasksSet = numberOfSet;
-    SET_OF_TASKS_TEXT_FIELD.innerText = ";  Сет задач: " + numberOfSet;
-
-    await SaveData(payload);
+async function ChangeSetOfTasksOfRoom(setOfTasks) {
+    currentSetOfTasks = setOfTasks;
+    SET_OF_TASKS_TEXT_FIELD.innerText = ";  Сет задач: " + setOfTasks;
 }
 
 async function StartGame() {
-    let payload = await LoadData();
-
-    if (payload.roomsCodes.length < 1) window.location.href = "index.html";
+    
     if (payload.rooms[ROOM_CODE].players.length < 1)
         return PopUpWindowOfError("Count of players is to small (at least 2)");
 
