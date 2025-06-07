@@ -1,3 +1,6 @@
+console.log(typeof new Date())
+console.log(new Date())
+
 const ROOM_CODE = sessionStorage.getItem("roomCode");
 
 const CODE_TEXT_FIELD = document.getElementById("code");
@@ -23,6 +26,7 @@ let timeForTasksInMinutes = 45;
 
 let currentSetOfTasks = "linear_1";
 let currentGrade = 8;
+let currentMaxTasks = 8;
 
 var currentRoomPlayers = 0;
 
@@ -164,34 +168,7 @@ async function StartGame() {
     if (payload.rooms[ROOM_CODE].players.length < 1)
         return PopUpWindowOfError("Count of players is to small (at least 2)");
 
-    payload.rooms[ROOM_CODE].isActive = true;
-    payload.rooms[ROOM_CODE].maxCountOfTasks = clamp(COUNT_OF_TASKS_INPUT.value, 1, 8);
-    payload.rooms[ROOM_CODE].maxTimeForTasks = timeForTasksInMinutes;
-    payload.rooms[ROOM_CODE].startTimeForTasks = new Date();
-
-    let playerList = [];
-    for (let i = 0; i < payload.rooms[ROOM_CODE].players.length; i++) {
-        playerList.push(i);
-    }
-
-    let usedPlayers = [];
-
-    while (usedPlayers.length < payload.rooms[ROOM_CODE].players.length) {
-        let randomInd = getRandomInt(0, payload.rooms[ROOM_CODE].players.length);
-        while (usedPlayers.includes(randomInd) || playerList[0] == randomInd)
-            randomInd = getRandomInt(0, payload.rooms[ROOM_CODE].players.length);
-
-        payload.rooms[ROOM_CODE].players[playerList[0]].enemy = randomInd;
-        payload.rooms[ROOM_CODE].players[randomInd].enemy = playerList[0];
-        payload.rooms[ROOM_CODE].players[playerList[0]].canChoose = Math.random() < 0.5;
-        payload.rooms[ROOM_CODE].players[randomInd].canChoose = !payload.rooms[ROOM_CODE].players[playerList[0]].canChoose;
-        usedPlayers.push(randomInd);
-        usedPlayers.push(playerList[0]);
-        playerList.splice(0, 1);
-        playerList.splice(playerList.indexOf(randomInd), 1);
-    }
-
-    await SaveData(payload);
+    let res = await SendPost("RoomManager", "StartGame", {roomCode: ROOM_CODE, setOfTasks: currentSetOfTasks, maxTasks: currentMaxTasks, grade:currentGrade, timeForTasks: timeForTasksInMinutes });
 
     window.location.href = "spectatorPage.html";
 }
