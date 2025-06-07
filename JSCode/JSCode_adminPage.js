@@ -15,7 +15,7 @@ const SET_OF_TASKS_DIV_LIST_GRADE_11 = document.getElementById("setList_grade_11
 
 CODE_TEXT_FIELD.innerText = "Код: " + ROOM_CODE;
 GRADE_TEXT_FIELD.innerText = "Клас:" + 8;
-SET_OF_TASKS_TEXT_FIELD.innerText = "Сет задач: Лінійні алгоритми 1";
+SET_OF_TASKS_TEXT_FIELD.innerText = "Тема: Лінійні алгоритми 1";
 COUNT_OF_TASKS_INPUT.value = 8;
 TIME_FIELD.innerText = 45;
 
@@ -87,6 +87,7 @@ function NewPlayerIcon(payload, playerIndex) {
 
     let playerBoxName = document.createElement("p");
     playerBoxName.textContent = payload.players[playerIndex].name;
+    playerBoxSkinImage.setAttribute('class', 'admin_playerIcon_name');
 
     playerBox.appendChild(playerBoxSkinImage);
     playerBox.appendChild(playerBoxName);
@@ -164,7 +165,7 @@ async function AddTimeForTasks(timeChanger) {
 
 async function ChangeSetOfTasksOfRoom(setOfTasks) {
     currentSetOfTasks = setOfTasks;
-    SET_OF_TASKS_TEXT_FIELD.innerText = "Сет задач: " + setOfTasks;
+    SET_OF_TASKS_TEXT_FIELD.innerText = "Тема: " + THEME_LIST[setOfTasks];
 }
 
 async function StartGame() {

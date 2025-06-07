@@ -11,15 +11,19 @@
     <div class="admin_organizer">
         <div class="classField_1 admin_roomSettings">
             <span> Задач: </span>
-            <input class="input" type="number" size="3" maxlength="2" id="countOfTasks" max="8" min="1">
-            <br><br>
+            <input class="inputField" type="number" size="3" maxlength="2" id="countOfTasks" max="8" min="1">
+            <br>
             <span> Час: </span>
-            <button class="button" type="button" onclick="AddTimeForTasks(5)"> + </button>
+            <button class="button" type="button" onclick="AddTimeForTasks(5)">
+                <font size=3> <b> + </b> </font>
+            </button>
             <span id="timeField"> </span>
-            <button class="button" type="button" onclick="AddTimeForTasks(-5)"> - </button>
+            <button class="button" type="button" onclick="AddTimeForTasks(-5)">
+                <font size=3> <b> - </b> </font>
+            </button>
             <br>
             <br>
-            <button class="button" type="button" onclick="GradeMenu()"> Клас </button> 
+            <button class="button" type="button" onclick="GradeMenu()"> Клас </button>
             <br>
 
             <div id="gradeList">
@@ -33,7 +37,7 @@
                 </button> <br>
             </div>
 
-            <button class="button" type="button" onclick="SetOfTasksMenu()"> Сет задач </button> 
+            <button class="button" type="button" onclick="SetOfTasksMenu()"> Тема </button>
             <br>
 
             <div id="setList_grade_8" class="admin_setList">
@@ -66,21 +70,19 @@
             </div>
 
             <div id="setList_grade_9" class="admin_setList">
-                <ul>
-
-                </ul>
             </div>
 
             <div id="setList_grade_10" class="admin_setList">
-                <ul>
-
-                </ul>
             </div>
 
             <div id="setList_grade_11" class="admin_setList">
-                <ul>
+            </div>
 
-                </ul>
+            <br>
+
+            <div>
+                <button class="button" type="button" onclick="StartGame()" style="position:absolute; bottom:10px; width: 80%; left:8.5%;">
+                    Почати гру <br>
             </div>
         </div>
 
@@ -91,14 +93,19 @@
         </div>
 
         <div class="admin_grid" id="playersGrid">
-            <!--
-        <div class="admin_grid_item"> Duck </div> -->
+            <div class="classField_1 admin_playerIcon">
+                <img src="./Icons/icon_0.png" class="universal_iconImage">
+                <p class="admin_playerIcon_name"> Duck </p>
+            </div>
+            <div class="classField_1 admin_playerIcon">
+                <img src="./Icons/icon_0.png" class="universal_iconImage">
+                <p class="admin_playerIcon_name"> 123456789012345678901234 </p>
+            </div>
+            <div class="classField_1 admin_playerIcon">
+                <img src="./Icons/icon_0.png" class="universal_iconImage">
+                <p class="admin_playerIcon_name"> Duck </p>
+            </div>
         </div>
-    </div>
-
-    <div>
-        <button class="button" type="button" onclick="StartGame()" style="position:static;">
-            Почати гру <br>
     </div>
 
     <script src="JSCode/JSCode_unversalFunctions.js"></script>
