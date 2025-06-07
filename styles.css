@@ -37,11 +37,7 @@ body {
     backdrop-filter: blur(10px);
     border-radius: 30px;
 
-    align-items: center;
-    text-align: center;
-
-    margin: 10px;
-    padding: 15px;
+    padding: 10px;
 }
 
 .classField_2 {
@@ -49,10 +45,6 @@ body {
     backdrop-filter: blur(10px);
     border-radius: 30px;
 
-    align-items: center;
-    text-align: center;
-
-    margin: 10px;
     padding: 15px;
 }
 
@@ -108,6 +100,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
     align-items: center;
     text-align: center;
+    justify-content: center;
 
     margin: 3px;
     padding: 8px;
@@ -194,65 +187,49 @@ input[type="number"]::-webkit-inner-spin-button {
 .index_classField {
     width: max(35vw, 300px);
 
-    transform: translateX(calc(50vw - 50%));
+    align-items: center;
+    text-align: center;
+
+    margin: 15px;
+
+    transform: translateX(calc(50vw - 50% - 15px));
 }
 
 
 /* ---------- Admin / Player ---------- */
 
-.admin_roomSettings,
-.admin_startGame {
+.admin_organizer {
+    height: 100vh;
+    width: calc(100% - 0px);
+
+    display: grid;
+    grid-template-columns: 2fr 7fr;
+    grid-template-rows: 1fr 7fr;
+    gap: 35px;
+}
+
+.admin_roomSettings {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+
+    border-radius: 0px;
+
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.admin_listButtons {
+    margin-left: 25px;
+}
+
+.admin_roomInfo {
+    align-self: center;
+    width: calc(100% - 20px - 17.5px);
+
     text-align: center;
+    align-content: center;
 }
-
-.admin_grid,
-.player_grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-}
-
-.admin_grid_item,
-.player_grid_item {
-    width: 150px;
-    height: 90px;
-    background-color: #aaaaaa;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.admin_startGameButton {
-    position: sticky;
-    margin-top: 25px;
-    bottom: 10vh;
-    left: 50vw;
-    transform: translateX(-50%);
-}
-
-.admin_gradeList {
-    display: none;
-}
-
-.admin_gradeList,
-.admin_setList {
-    display: none;
-}
-
-.player_chooseImageGrid {
-    display: none;
-    grid-template-columns: repeat(5, 80px);
-    gap: 25px 7px;
-}
-
-.player_chooseImageButton {
-    background: url(./Icons/icon_0.png);
-    background-size: 70px;
-    height: 70px;
-    width: 70px;
-}
-
 
 /* ---------- Spectator ---------- */
 

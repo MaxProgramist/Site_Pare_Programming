@@ -1,13 +1,10 @@
-console.log(typeof new Date())
-console.log(new Date())
-
 const ROOM_CODE = sessionStorage.getItem("roomCode");
 
 const CODE_TEXT_FIELD = document.getElementById("code");
 const GRADE_TEXT_FIELD = document.getElementById("grade");
 const SET_OF_TASKS_TEXT_FIELD = document.getElementById("setOfTasks");
 const PLAYER_DIV_LIST = document.getElementById("playersGrid");
-const COUNT_OF_TASKS_INPUT = document.getElementById("countOfPlayersInput");
+const COUNT_OF_TASKS_INPUT = document.getElementById("countOfTasks");
 const TIME_FIELD = document.getElementById("timeField");
 
 const GRADE_DIV_LIST = document.getElementById("gradeList");
@@ -17,9 +14,16 @@ const SET_OF_TASKS_DIV_LIST_GRADE_10 = document.getElementById("setList_grade_10
 const SET_OF_TASKS_DIV_LIST_GRADE_11 = document.getElementById("setList_grade_11");
 
 CODE_TEXT_FIELD.innerText = "Код: " + ROOM_CODE;
-GRADE_TEXT_FIELD.innerText = ";  Клас:" + 8;
-SET_OF_TASKS_TEXT_FIELD.innerText = ";  Сет задач: Лінійні алгоритми 1";
+GRADE_TEXT_FIELD.innerText = "Клас:" + 8;
+SET_OF_TASKS_TEXT_FIELD.innerText = "Сет задач: Лінійні алгоритми 1";
 COUNT_OF_TASKS_INPUT.value = 8;
+TIME_FIELD.innerText = 45;
+
+GRADE_DIV_LIST.style.display = "none";
+SET_OF_TASKS_DIV_LIST_GRADE_8.style.display = "none";
+SET_OF_TASKS_DIV_LIST_GRADE_9.style.display = "none";
+SET_OF_TASKS_DIV_LIST_GRADE_10.style.display = "none";
+SET_OF_TASKS_DIV_LIST_GRADE_11.style.display = "none";
 
 let divToPlayer = [];
 let timeForTasksInMinutes = 45;
@@ -45,11 +49,12 @@ function Delay(ms) {
 }
 
 async function SomeAsyncFunction() {
-    let payload = await SendPost("RoomManager", "GetAllPlayers", {roomCode: ROOM_CODE});
+    let payload = await SendPost("RoomManager", "GetAllPlayers", { roomCode: ROOM_CODE });
 
     if (payload.status == 404 && payload.description == "No room with this code!") window.location.href = "index.html";
 
     TIME_FIELD.innerText = timeForTasksInMinutes;
+    COUNT_OF_TASKS_INPUT.value = clamp(COUNT_OF_TASKS_INPUT.value, 1, 8);
 
     for (let i = 0; i < divToPlayer.length; i++)
         UpdatePlayerSkin(payload, i);
@@ -92,10 +97,11 @@ function NewPlayerIcon(payload, playerIndex) {
 }
 
 function GradeMenu() {
-    if (GRADE_DIV_LIST.style.display === "none")
+    if (GRADE_DIV_LIST.style.display === "none") {
         GRADE_DIV_LIST.style.display = "block";
-    else
+    } else {
         GRADE_DIV_LIST.style.display = "none";
+    }
 
     SET_OF_TASKS_DIV_LIST_GRADE_8.style.display = "none";
     SET_OF_TASKS_DIV_LIST_GRADE_9.style.display = "none";
@@ -104,11 +110,9 @@ function GradeMenu() {
 }
 
 async function SetOfTasksMenu() {
-    let payload = await LoadData();
-
     GRADE_DIV_LIST.style.display = "none";
 
-    if (payload.rooms[ROOM_CODE].grade == 8) {
+    if (currentGrade == 8) {
         SET_OF_TASKS_DIV_LIST_GRADE_9.style.display = "none";
         SET_OF_TASKS_DIV_LIST_GRADE_10.style.display = "none";
         SET_OF_TASKS_DIV_LIST_GRADE_11.style.display = "none";
@@ -117,7 +121,7 @@ async function SetOfTasksMenu() {
         else
             SET_OF_TASKS_DIV_LIST_GRADE_8.style.display = "none";
     }
-    else if (payload.rooms[ROOM_CODE].grade == 9) {
+    else if (currentGrade == 9) {
         SET_OF_TASKS_DIV_LIST_GRADE_8.style.display = "none";
         SET_OF_TASKS_DIV_LIST_GRADE_10.style.display = "none";
         SET_OF_TASKS_DIV_LIST_GRADE_11.style.display = "none";
@@ -126,7 +130,7 @@ async function SetOfTasksMenu() {
         else
             SET_OF_TASKS_DIV_LIST_GRADE_9.style.display = "none";
     }
-    else if (payload.rooms[ROOM_CODE].grade == 10) {
+    else if (currentGrade == 10) {
         SET_OF_TASKS_DIV_LIST_GRADE_9.style.display = "none";
         SET_OF_TASKS_DIV_LIST_GRADE_8.style.display = "none";
         SET_OF_TASKS_DIV_LIST_GRADE_11.style.display = "none";
@@ -135,7 +139,7 @@ async function SetOfTasksMenu() {
         else
             SET_OF_TASKS_DIV_LIST_GRADE_10.style.display = "none";
     }
-    else if (payload.rooms[ROOM_CODE].grade == 11) {
+    else if (currentGrade == 11) {
         SET_OF_TASKS_DIV_LIST_GRADE_8.style.display = "none";
         SET_OF_TASKS_DIV_LIST_GRADE_10.style.display = "none";
         SET_OF_TASKS_DIV_LIST_GRADE_9.style.display = "none";
@@ -148,8 +152,8 @@ async function SetOfTasksMenu() {
 
 
 async function ChangeGradeOfRoom(numberOfGrade) {
-    currentSetOfTasks = numberOfGrade;
-    GRADE_TEXT_FIELD.innerText = ";  Клас:" + numberOfGrade;
+    currentGrade = numberOfGrade;
+    GRADE_TEXT_FIELD.innerText = "Клас:" + numberOfGrade;
 }
 
 async function AddTimeForTasks(timeChanger) {
@@ -160,15 +164,16 @@ async function AddTimeForTasks(timeChanger) {
 
 async function ChangeSetOfTasksOfRoom(setOfTasks) {
     currentSetOfTasks = setOfTasks;
-    SET_OF_TASKS_TEXT_FIELD.innerText = ";  Сет задач: " + setOfTasks;
+    SET_OF_TASKS_TEXT_FIELD.innerText = "Сет задач: " + setOfTasks;
 }
 
 async function StartGame() {
-    
     if (payload.rooms[ROOM_CODE].players.length < 1)
         return PopUpWindowOfError("Count of players is to small (at least 2)");
 
-    let res = await SendPost("RoomManager", "StartGame", {roomCode: ROOM_CODE, setOfTasks: currentSetOfTasks, maxTasks: currentMaxTasks, grade:currentGrade, timeForTasks: timeForTasksInMinutes });
+    let res = await SendPost("RoomManager", "StartGame", { roomCode: ROOM_CODE, setOfTasks: currentSetOfTasks, maxTasks: COUNT_OF_TASKS_INPUT.value, grade: currentGrade, timeForTasks: timeForTasksInMinutes });
+
+    if (res.status != 200) return PopUpWindowOfError(res.description);
 
     window.location.href = "spectatorPage.html";
 }
@@ -178,7 +183,7 @@ function getRandomInt(min, max) {
 }
 
 const clamp = (value, min, max) => {
-  if (value < min) return min;
-  if (value > max) return max;
-  return value;
+    if (value < min) return min;
+    if (value > max) return max;
+    return value;
 }

@@ -8,86 +8,97 @@
 </head>
 
 <body>
-    <div>
-        <button class="admin_gradeListButton" type="button" onclick="GradeMenu()"> Клас </button>
-        <button class="admin_gradeListButton" type="button" onclick="SetOfTasksMenu()"> Сет задач </button>
-        <button class="admin_addTime" type="button" onclick="AddTimeForTasks(5)"> + </button>
-        <button class="admin_addTime" type="button" onclick="AddTimeForTasks(-5)"> - </button>
-        <span id="timeField"> </span>
-        <input class="admin_countOfPlayersInput" type="number" size="3" maxlength="2" id="countOfPlayersInput" max="8" min="1">
+    <div class="admin_organizer">
+        <div class="classField_1 admin_roomSettings">
+            <span> Задач: </span>
+            <input class="input" type="number" size="3" maxlength="2" id="countOfTasks" max="8" min="1">
+            <br><br>
+            <span> Час: </span>
+            <button class="button" type="button" onclick="AddTimeForTasks(5)"> + </button>
+            <span id="timeField"> </span>
+            <button class="button" type="button" onclick="AddTimeForTasks(-5)"> - </button>
+            <br>
+            <br>
+            <button class="button" type="button" onclick="GradeMenu()"> Клас </button> 
+            <br>
 
-        <div class="admin_roomSettings">
-            <span id="code"> Код: </span>
-            <span id="grade"> ; Клас: </span>
-            <span id="setOfTasks"> ; Сет задач: </span>
+            <div id="gradeList">
+                <button class="button admin_listButtons" type="button" onclick="ChangeGradeOfRoom(8)"> Клас 8
+                </button> <br>
+                <button class="button admin_listButtons" type="button" onclick="ChangeGradeOfRoom(9)"> Клас 9
+                </button> <br>
+                <button class="button admin_listButtons" type="button" onclick="ChangeGradeOfRoom(10)"> Клас 10
+                </button> <br>
+                <button class="button admin_listButtons" type="button" onclick="ChangeGradeOfRoom(11)"> Клас 11
+                </button> <br>
+            </div>
+
+            <button class="button" type="button" onclick="SetOfTasksMenu()"> Сет задач </button> 
+            <br>
+
+            <div id="setList_grade_8" class="admin_setList">
+                <button class="button admin_listButtons" type="button" onclick="ChangeSetOfTasksOfRoom('linar_1')">
+                    Лінійні
+                    алгоритми 1
+                </button> <br>
+                <button class="button admin_listButtons" type="button" onclick="ChangeSetOfTasksOfRoom('linar_2')">
+                    Лінійні
+                    алгоритми 2
+                </button> <br>
+                <button class="button admin_listButtons" type="button" onclick="ChangeSetOfTasksOfRoom('linar_3')">
+                    Лінійні
+                    алгоритми 3
+                </button> <br>
+                <button class="button admin_listButtons" type="button" onclick="ChangeSetOfTasksOfRoom('branching')">
+                    Розгалуження
+                </button> <br>
+                <button class="button admin_listButtons" type="button" onclick="ChangeSetOfTasksOfRoom('Cycles_1')">
+                    Цикли 1
+                </button> <br>
+                <button class="button admin_listButtons" type="button" onclick="ChangeSetOfTasksOfRoom('Cycles_2')">
+                    Цикли 2
+                </button> <br>
+                <button class="button admin_listButtons" type="button" onclick="ChangeSetOfTasksOfRoom('GCD_LCM')">
+                    НСД
+                    та
+                    НСК
+                </button>
+            </div>
+
+            <div id="setList_grade_9" class="admin_setList">
+                <ul>
+
+                </ul>
+            </div>
+
+            <div id="setList_grade_10" class="admin_setList">
+                <ul>
+
+                </ul>
+            </div>
+
+            <div id="setList_grade_11" class="admin_setList">
+                <ul>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="classField_1 admin_roomInfo">
+            <span id="code" style="margin: 15px;"> Код: </span>
+            <span id="grade" style="margin: 15px;"> ; Клас: </span>
+            <span id="setOfTasks" style="margin: 15px;"> ; Сет задач: </span>
+        </div>
+
+        <div class="admin_grid" id="playersGrid">
+            <!--
+        <div class="admin_grid_item"> Duck </div> -->
         </div>
     </div>
 
-    <div class="admin_grid" id="playersGrid">
-        <!--
-        <div class="admin_grid_item"> Duck </div> -->
-    </div>
-
-    <div class="admin_startGame">
-        <button class="admin_startGameButton" type="button" onclick="StartGame()">
+    <div>
+        <button class="button" type="button" onclick="StartGame()" style="position:static;">
             Почати гру <br>
-    </div>
-
-    <div id="gradeList" class="admin_gradeList">
-        <ul>
-            <li> <button class="admin_gradeList_item" type="button" onclick="ChangeGradeOfRoom(8)"> Клас 8 </button>
-            </li>
-            <li> <button class="admin_gradeList_item" type="button" onclick="ChangeGradeOfRoom(9)"> Клас 9 </button>
-            </li>
-            <li> <button class="admin_gradeList_item" type="button" onclick="ChangeGradeOfRoom(10)"> Клас 10 </button>
-            </li>
-            <li> <button class="admin_gradeList_item" type="button" onclick="ChangeGradeOfRoom(11)"> Клас 11 </button>
-            </li>
-        </ul>
-    </div>
-
-    <div id="setList_grade_8" class="admin_setList">
-        <ul>
-            <li> <button class="admin_setList_item" type="button" onclick="ChangeSetOfTasksOfRoom('linar_1')"> Лінійні алгоритми 1
-                </button>
-            </li>
-            <li> <button class="admin_setList_item" type="button" onclick="ChangeSetOfTasksOfRoom('linar_2')"> Лінійні алгоритми 2
-                </button>
-            </li>
-            <li> <button class="admin_setList_item" type="button" onclick="ChangeSetOfTasksOfRoom('linar_3')"> Лінійні алгоритми 3
-                </button>
-            </li>
-            <li> <button class="admin_setList_item" type="button" onclick="ChangeSetOfTasksOfRoom('branching')"> Розгалуження
-                </button>
-            </li>
-            <li> <button class="admin_setList_item" type="button" onclick="ChangeSetOfTasksOfRoom('Cycles_1')"> Цикли 1
-                </button>
-            </li>
-            <li> <button class="admin_setList_item" type="button" onclick="ChangeSetOfTasksOfRoom('Cycles_2')"> Цикли 2
-                </button>
-            </li>
-            <li> <button class="admin_setList_item" type="button" onclick="ChangeSetOfTasksOfRoom('GCD_LCM')"> НСД та НСК
-                </button>
-            </li>
-        </ul>
-    </div>
-
-    <div id="setList_grade_9" class="admin_setList">
-        <ul>
-            
-        </ul>
-    </div>
-
-    <div id="setList_grade_10" class="admin_setList">
-        <ul>
-            
-        </ul>
-    </div>
-
-    <div id="setList_grade_11" class="admin_setList">
-        <ul>
-            
-        </ul>
     </div>
 
     <script src="JSCode/JSCode_unversalFunctions.js"></script>
