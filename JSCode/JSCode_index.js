@@ -21,7 +21,7 @@ async function JoinRoom() {
     if (res.status != 200) return PopUpWindow(res.description);
 
     await sessionStorage.setItem("roomCode", joinRoomCodeValue);
-    await sessionStorage.setItem("playerIndex", payload.rooms[joinRoomCodeValue].players.length-1);
+    await sessionStorage.setItem("playerIndex", res.playerIndex);
     window.location.href = "playerPage.html";
 }
 
