@@ -56,6 +56,8 @@ async function SomeAsyncFunction() {
     TIME_FIELD.innerText = timeForTasksInMinutes;
     COUNT_OF_TASKS_INPUT.value = clamp(COUNT_OF_TASKS_INPUT.value, 1, 8);
 
+    console.log(typeof payload.players);
+
     for (let i = 0; i < divToPlayer.length; i++)
         UpdatePlayerSkin(payload, i);
 
