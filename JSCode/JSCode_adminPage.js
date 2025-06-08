@@ -170,11 +170,11 @@ async function ChangeSetOfTasksOfRoom(setOfTasks) {
 
 async function StartGame() {
     if (payload.rooms[ROOM_CODE].players.length < 1)
-        return PopUpWindowOfError("Count of players is to small (at least 2)");
+        return PopUpWindow("Count of players is to small (at least 2)");
 
     let res = await SendPost("RoomManager", "StartGame", { roomCode: ROOM_CODE, setOfTasks: currentSetOfTasks, maxTasks: COUNT_OF_TASKS_INPUT.value, grade: currentGrade, timeForTasks: timeForTasksInMinutes });
 
-    if (res.status != 200) return PopUpWindowOfError(res.description);
+    if (res.status != 200) return PopUpWindow(res.description);
 
     window.location.href = "spectatorPage.html";
 }

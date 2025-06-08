@@ -26,15 +26,26 @@
 }
 
 body {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
     margin: 0;
     padding: 0;
     background-color: rgb(var(--color_background));
     color: rgb(var(--color_text_main));
 }
 
+canvas {
+    top:0px;
+
+    display: block;
+    position: absolute;
+    z-index: -1;
+}
+
 .classField_1 {
     background-color: rgba(var(--color_class_1), 0.7);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
     border-radius: 30px;
 
     padding: 10px;
@@ -42,7 +53,7 @@ body {
 
 .classField_2 {
     background-color: rgb(var(--color_class_2));
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
     border-radius: 30px;
 
     padding: 15px;
@@ -158,6 +169,8 @@ input[type="number"]::-webkit-inner-spin-button {
 
     align-items: center;
     align-content: center;
+    text-align: center;
+
     padding: 10px;
 
     backdrop-filter: blur(0px);
@@ -180,6 +193,15 @@ input[type="number"]::-webkit-inner-spin-button {
     padding: 0px;
 
     color: rgb(var(--color_text_main));
+}
+
+.hide-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
 }
 
 /* ---------- Index ---------- */
@@ -206,6 +228,7 @@ input[type="number"]::-webkit-inner-spin-button {
     grid-template-columns: 2fr 7fr;
     grid-template-rows: 1fr 7fr;
     gap: 35px;
+    row-gap: 35px 0px;
 }
 
 .admin_roomSettings {
@@ -224,6 +247,8 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .admin_roomInfo {
+    position: relative;
+
     align-self: center;
     width: calc(100% - 20px - 17.5px);
 
@@ -232,8 +257,13 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .admin_grid {
-    width: calc(100% - 20px);
-    height: calc(100% - 20px);
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
 
     overflow: auto;
 }
@@ -244,6 +274,7 @@ input[type="number"]::-webkit-inner-spin-button {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 
     margin: 10px;
 }
