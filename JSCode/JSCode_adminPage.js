@@ -57,7 +57,7 @@ async function SomeAsyncFunction() {
     COUNT_OF_TASKS_INPUT.value = clamp(COUNT_OF_TASKS_INPUT.value, 1, 8);
 
     console.log(typeof payload.players);
-    console.log(typeof payload);
+    console.log(payload);
 
     for (let i = 0; i < divToPlayer.length; i++)
         UpdatePlayerSkin(payload, i);
