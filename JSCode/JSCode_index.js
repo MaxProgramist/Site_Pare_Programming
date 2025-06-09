@@ -38,7 +38,7 @@ async function MakeRoom() {
         if (charCode < 48 || charCode > 57) return PopUpWindow("Incorrect code type (must be 4 numbers)");
     }
 
-    let res = await SendPost("RoomManager", "MakeRoom", {roomCode: makeRoomCodeValue, maxCountOfPlayers: roomPlayersCount});
+    let res = await SendPost("RoomManager", "MakeRoom", {roomCode: makeRoomCodeValue, maxCountOfPlayers: parseInt(roomPlayersCount)});
 
     if (res.status != 200) return PopUpWindow(res.description);
 
