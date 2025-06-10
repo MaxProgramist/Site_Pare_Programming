@@ -36,7 +36,7 @@ function ChangePlayersScore(payload, playerIndex) {
     
     let imgInsideDiv = playerDiv.querySelector("img");
     let pInsideDiv = playerDiv.querySelectorAll("p");
-    imgInsideDiv.src = `./Icons/icon_${playerSkin}.png`;
+    imgInsideDiv.src = ICONS_LIST[playerSkin];
     pInsideDiv[1].textContent = `${playerScore}/${payload.rooms[ROOM_CODE].maxCountOfTasks*100}`;
 }
 
@@ -60,12 +60,12 @@ function NewPlayerIcon(payload, playerIndex) {
     let playerBox = document.createElement("div");
     playerBox.setAttribute('class', 'admin_grid_item');
 
-    let playerName = payload.rooms[ROOM_CODE].players[playerIndex].name;
-    let playerScore = payload.rooms[ROOM_CODE].players[playerIndex].score;
-    let playerSkin = payload.rooms[ROOM_CODE].players[playerIndex].skin;
+    let playerName = payload.players[playerIndex].name;
+    let playerScore = payload.players[playerIndex].score;
+    let playerSkin = payload.players[playerIndex].skin;
 
     let playerBoxSkinImage = document.createElement("img");
-    playerBoxSkinImage.src = "./Icons/icon_0.png";
+    playerBoxSkinImage.src = ICONS_LIST[playerSkin];
     playerBoxSkinImage.setAttribute('class', 'universal_iconImage');
 
     let playerBoxProfile = document.createElement("div");

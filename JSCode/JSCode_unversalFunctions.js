@@ -8,6 +8,11 @@ const THEME_LIST = {
     "GCD_LCM": "НСД та НСК"
 };
 
+const ICONS_LIST = [
+    "./Icons/icon_0.png", 
+    "./Icons/icon_1.png"
+];
+
 //#region PopUpWindow
 
 function PopUpWindow(errorType, icon = "./Icons/ErrorIcon.png") {

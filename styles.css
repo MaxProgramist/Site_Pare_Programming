@@ -218,7 +218,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 
-/* ---------- Admin / Player ---------- */
+/* ---------- Admin ---------- */
 
 .admin_organizer {
     height: calc(100vh - 20px);
@@ -246,7 +246,7 @@ input[type="number"]::-webkit-inner-spin-button {
     margin-left: 25px;
 }
 
-.admin_roomInfo {
+.admin_player_roomInfo {
     position: relative;
 
     align-self: center;
@@ -256,7 +256,7 @@ input[type="number"]::-webkit-inner-spin-button {
     align-content: center;
 }
 
-.admin_grid {
+.admin_player_grid {
     width: 100%;
     height: 100%;
 
@@ -268,7 +268,7 @@ input[type="number"]::-webkit-inner-spin-button {
     overflow: auto;
 }
 
-.admin_playerIcon {
+.admin_player_playerIcon {
     width: max(100px, 20%);
 
     display: flex;
@@ -279,7 +279,7 @@ input[type="number"]::-webkit-inner-spin-button {
     margin: 10px;
 }
 
-.admin_playerIcon_name {
+.admin_player_playerIcon_name {
     word-break: break-all;
     text-align: center;
 }

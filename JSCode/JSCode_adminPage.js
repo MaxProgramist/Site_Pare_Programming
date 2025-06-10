@@ -78,21 +78,21 @@ function UpdatePlayerSkin(payload, playerIndex) {
 
     let imgInsideDiv = playerDiv.querySelector("img");
     let pInsideDiv = playerDiv.querySelector("p");
-    imgInsideDiv.src = `./Icons/icon_${playerSkin}.png`;
+    imgInsideDiv.src = ICONS_LIST[playerSkin];
     pInsideDiv.textContent = playerName;
 }
 
 function NewPlayerIcon(payload, playerIndex) {
     let playerBox = document.createElement("div");
-    playerBox.setAttribute('class', 'admin_grid_item');
+    playerBox.setAttribute('class', 'admin_player_playerIcon');
 
     let playerBoxSkinImage = document.createElement("img");
-    playerBoxSkinImage.src = "./Icons/icon_0.png";
+    playerBoxSkinImage.src = ICONS_LIST[0];
     playerBoxSkinImage.setAttribute('class', 'universal_iconImage');
 
     let playerBoxName = document.createElement("p");
     playerBoxName.textContent = payload.players[playerIndex].name;
-    playerBoxSkinImage.setAttribute('class', 'admin_playerIcon_name');
+    playerBoxSkinImage.setAttribute('class', 'admin_player_playerIcon_name');
 
     playerBox.appendChild(playerBoxSkinImage);
     playerBox.appendChild(playerBoxName);
