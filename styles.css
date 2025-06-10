@@ -105,6 +105,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .button {
+    z-index: 0;
     background-color: rgb(var(--color_button_main));
     border-radius: 15px;
     border-color: #00000000;
@@ -124,6 +125,8 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .button:hover {
+    z-index: 2;
+
     background-color: rgb(var(--color_button_hover));
     outline: none;
 
@@ -282,6 +285,27 @@ input[type="number"]::-webkit-inner-spin-button {
 .admin_player_playerIcon_name {
     word-break: break-all;
     text-align: center;
+}
+
+.player_organizer {
+    height: calc(100vh - 20px);
+    width: calc(100% - 0px);
+
+    display: grid;
+    grid-template-rows: 1fr 7fr;
+    gap: 35px;
+}
+
+.player_changeSkin {
+    position: absolute;
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr;
+
+    width: 24%;
+
+    top:15px;
+    left: 15px;
 }
 
 /* ---------- Spectator ---------- */
