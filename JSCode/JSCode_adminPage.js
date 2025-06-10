@@ -52,11 +52,13 @@ async function SomeAsyncFunction() {
     let payload = await SendPost("RoomManager", "GetAllPlayers", { roomCode: ROOM_CODE });
 
     if (payload.status == 404 && payload.description == "No room with this code!") window.location.href = "index.html";
+    if (payload.status != 200) PopUpWindow("Something went wrong...");
 
     TIME_FIELD.innerText = timeForTasksInMinutes;
     COUNT_OF_TASKS_INPUT.value = clamp(COUNT_OF_TASKS_INPUT.value, 1, 8);
 
     console.log(typeof payload.players);
+    console.log(typeof payload);
     console.log(payload);
 
     for (let i = 0; i < divToPlayer.length; i++)
