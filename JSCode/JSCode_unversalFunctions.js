@@ -219,7 +219,7 @@ async function SendPost(servername, functionName, arguments) {
             server: servername,
             arguments: { name: functionName, arguments: arguments }
         })
-    }));
+    })).json();
 }
 
 async function ResetData() {
@@ -230,7 +230,7 @@ async function ResetData() {
             server: servername,
             arguments: { name: "ResetData", arguments: {} }
         })
-    });
+    }).json();
 
     if (res.status != 200) {
         return PopUpWindowOfError(res.description);
