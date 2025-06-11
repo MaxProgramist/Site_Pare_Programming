@@ -16,7 +16,7 @@ async function JoinRoom() {
         if (charCode < 48 || charCode > 57) return PopUpWindow("Incorrect code type (must be 4 numbers)");
     }
 
-    let res = await SendPost("RoomManager", "JoinRoom", {roomCode: joinRoomCodeValue, name: joinRoomCodeValue});
+    let res = await SendPost("RoomManager", "JoinRoom", {roomCode: joinRoomCodeValue, name: nicknameValue});
 
     if (res.status != 200) return PopUpWindow(res.description);
 
