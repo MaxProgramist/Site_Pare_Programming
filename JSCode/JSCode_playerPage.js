@@ -49,8 +49,8 @@ async function SomeAsyncFunction() {
 function UpdatePlayerSkin(payload, playerIndex) {
     let playerDiv = divToPlayer[playerIndex];
 
-    let playerSkin = payload.players[playerIndex].skin;
-    let playerName = payload.players[playerIndex].name;
+    let playerSkin = payload[playerIndex].skin;
+    let playerName = payload[playerIndex].name;
 
     let imgInsideDiv = playerDiv.querySelector("img");
     let pInsideDiv = playerDiv.querySelector("p");
