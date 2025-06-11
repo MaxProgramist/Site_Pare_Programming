@@ -98,5 +98,5 @@ function SkinMenu() {
 
 async function ChooseSkin(skinIndex) {
     let ans = await SendPost("RoomManager", "ChangeIcon", { roomCode: ROOM_CODE, playerIndex: THIS_PLAYER_INDEX, newIcon: skinIndex, iconCode: "0000" });
-    if (ans.status != 200) PopUpWindow("Something went wrong...");
+    if (ans.status != 200) PopUpWindow(ans.description);
 }
