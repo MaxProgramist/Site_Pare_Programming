@@ -28,7 +28,8 @@ async function SomeAsyncFunction() {
     let roomInfo = await SendPost("RoomManager", "GetRoomInfo", { roomCode: ROOM_CODE });
 
     if (allPlayers.status == 404 && allPlayers.description == "No room with this code!") window.location.href = "index.html";
-    if (allPlayers.status != 200) PopUpWindow("Something went wrong...");
+    if (allPlayers.status != 200) PopUpWindow(allPlayers.description);
+    if (roomInfo.status != 200) PopUpWindow(roomInfo.description);
 
     console.log(allPlayers);
 
