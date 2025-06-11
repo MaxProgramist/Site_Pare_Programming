@@ -42,7 +42,7 @@ async function SomeAsyncFunction() {
     for (let i = 0; i < divToPlayer.length; i++)
         UpdatePlayerSkin(allPlayers.players, i);
 
-    while (allPlayers.length > currentRoomPlayers) {
+    while (allPlayers.players.length > currentRoomPlayers) {
         NewPlayerIcon(allPlayers.players, currentRoomPlayers);
         currentRoomPlayers++;
     }
