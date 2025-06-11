@@ -4,6 +4,8 @@ const THIS_PLAYER_INDEX = sessionStorage.getItem("playerIndex");
 const PLAYER_DIV_LIST = document.getElementById("playersGrid");
 const CHOOSE_IMAGE_GRID = document.getElementById("chooseImageGrid");
 
+CHOOSE_IMAGE_GRID.style.display = "none";
+
 var currentRoomPlayers = 0;
 let divToPlayer = [];
 
