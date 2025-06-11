@@ -51,7 +51,7 @@ async function SomeAsyncFunction() {
 function UpdatePlayerSkin(payload, playerIndex) {
     let playerDiv = divToPlayer[playerIndex];
 
-    let playerSkin = payload[playerIndex].skin;
+    let playerSkin = payload[playerIndex].icon;
     let playerName = payload[playerIndex].name;
 
     let imgInsideDiv = playerDiv.querySelector("img");
@@ -65,7 +65,7 @@ function UpdatePlayerSkin(payload, playerIndex) {
 
 function NewPlayerIcon(payload, playerIndex) {
     let playerBox = document.createElement("div");
-    playerBox.setAttribute('class', 'admin_player_playerIcon');
+    playerBox.setAttribute('class', 'classField_1 admin_player_playerIcon');
 
     let playerBoxSkinImage = document.createElement("img");
     playerBoxSkinImage.src = ICONS_LIST[0];
@@ -73,9 +73,9 @@ function NewPlayerIcon(payload, playerIndex) {
 
     let playerBoxName = document.createElement("p");
     if (playerIndex == THIS_PLAYER_INDEX)
-        playerBoxName.textContent = payload.players[playerIndex].name + " (Ти)";
+        playerBoxName.textContent = payload[playerIndex].name + " (Ти)";
     else
-        playerBoxName.textContent = payload.players[playerIndex].name;
+        playerBoxName.textContent = payload[playerIndex].name;
     playerBoxName.setAttribute('class', 'admin_player_playerIcon_name');
 
     playerBox.appendChild(playerBoxSkinImage);
