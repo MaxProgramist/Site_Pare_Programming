@@ -82,7 +82,7 @@ function UpdatePlayerSkin(payload, playerIndex) {
 
 function NewPlayerIcon(payload, playerIndex) {
     let playerBox = document.createElement("div");
-    playerBox.setAttribute('class', 'admin_player_playerIcon');
+    playerBox.setAttribute('class', 'classField_1 admin_player_playerIcon');
 
     let playerBoxSkinImage = document.createElement("img");
     playerBoxSkinImage.src = ICONS_LIST[0];
@@ -90,7 +90,7 @@ function NewPlayerIcon(payload, playerIndex) {
 
     let playerBoxName = document.createElement("p");
     playerBoxName.textContent = payload[playerIndex].name;
-    playerBoxSkinImage.setAttribute('class', 'admin_player_playerIcon_name');
+    playerBoxName.setAttribute('class', 'admin_player_playerIcon_name');
 
     playerBox.appendChild(playerBoxSkinImage);
     playerBox.appendChild(playerBoxName);
