@@ -28,6 +28,8 @@ async function SomeAsyncFunction() {
     if (allPlayers.status == 404 && allPlayers.description == "No room with this code!") window.location.href = "index.html";
     if (allPlayers.status != 200) PopUpWindow("Something went wrong...");
 
+    console.log(allPlayers);
+
     if (roomInfo.isStartedGame)
     {
         await sessionStorage.setItem("gradeNum", roomInfo.grade);
@@ -38,10 +40,10 @@ async function SomeAsyncFunction() {
     }
 
     for (let i = 0; i < divToPlayer.length; i++)
-        UpdatePlayerSkin(allPlayers, i);
+        UpdatePlayerSkin(allPlayers.players, i);
 
     while (allPlayers.length > currentRoomPlayers) {
-        NewPlayerIcon(allPlayers, currentRoomPlayers);
+        NewPlayerIcon(allPlayers.players, currentRoomPlayers);
         currentRoomPlayers++;
     }
 }

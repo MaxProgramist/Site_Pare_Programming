@@ -60,10 +60,10 @@ async function SomeAsyncFunction() {
     console.log(payload);
 
     for (let i = 0; i < divToPlayer.length; i++)
-        UpdatePlayerSkin(payload, i);
+        UpdatePlayerSkin(payload.players, i);
 
     while (payload.players.length > currentRoomPlayers) {
-        NewPlayerIcon(payload, currentRoomPlayers);
+        NewPlayerIcon(payload.players, currentRoomPlayers);
         currentRoomPlayers++;
     }
 }
