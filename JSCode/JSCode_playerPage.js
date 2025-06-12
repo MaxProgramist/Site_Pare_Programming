@@ -97,6 +97,6 @@ function SkinMenu() {
 }
 
 async function ChooseSkin(skinIndex) {
-    let ans = await SendPost("RoomManager", "ChangeIcon", { roomCode: ROOM_CODE, playerIndex: parseInt(THIS_PLAYER_INDEX), newIcon: parseInt(skinIndex), iconCode: "0000" });
+    let ans = await SendPost("RoomManager", "ChangeIcon", { roomCode: ROOM_CODE, playerIndex: parseInt(THIS_PLAYER_INDEX), newIcon: parseInt(skinIndex), code: "0000" });
     if (ans.status != 200) PopUpWindow(ans.description);
 }
