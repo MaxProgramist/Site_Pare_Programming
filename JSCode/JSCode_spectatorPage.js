@@ -21,22 +21,25 @@ function Delay(ms) {
 }
 
 async function SomeAsyncFunction() {
-    let payload = await SendPost("RoomManager", "GetAllPlayers", { roomCode: ROOM_CODE });
+    let allPlayers = await SendPost("RoomManager", "GetAllPlayers", { roomCode: ROOM_CODE });
+    let roomInfo = await SendPost("RoomManager", "GetRoomInfo", { roomCode: ROOM_CODE });
 
     if (payload.status == 404 && payload.description == "No room with this code!") window.location.href = "index.html";
     if (payload.status != 200) PopUpWindow(payload.description);
 
     for (let i = 0; i < payload.players.length; i++)
-        ChangePlayersScore(payload, i);
+        ChangePlayersScore(payload, roomInfo, i);
 }
 
-function ChangePlayersScore(payload, playerIndex) {
+function ChangePlayersScore(playerInfo, roomInfo, playerIndex) {
     let playerDiv = divToPlayer[playerIndex];
 
-    let playerScore = payload.players[playerIndex].score;
+    let playerScore = playerInfo.players[playerIndex].score;
 
     let pInsideDiv = playerDiv.querySelectorAll('div.spectator_progressCircle_text');
-    pInsideDiv[0].textContent = `${playerScore}/<br>${payload.rooms[ROOM_CODE].maxTasks * 100}`;
+    pInsideDiv[0].textContent = `${playerScore}/<br>${roomInfo.maxTasks * 100}`;
+
+    SetProgress(playerScore/roomInfo.maxTasks*100 ,playerIndex);
 }
 
 async function MakePlayersGroups() {
