@@ -4,15 +4,60 @@
 <head>
     <title> Pare programming </title>
     <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <canvas id="bg"></canvas>
-    
-    <div class="spectator_grid" id="playersGrid">
-        <!--
-        <div class="admin_grid_item"> Duck </div> -->
+
+    <div class="spectator_organizer">
+        <div>
+            Time: 19:30
+        </div>
+
+        <div class="spectator_grid" id="playersGrid">
+            <div class="classField_1 spectator_playerIcon">
+                <div class="spectator_playerIcon_info">
+                    <img src="./Icons/icon_0.png" class="universal_iconImage">
+                    <br>
+                    <span class="spectator_playerIcon_name"> Duck </span>
+                </div>
+                <div class="spectator_progressCircle" style="--percentage: 180deg; --progress-color: #4caf50">
+                    <div class="spectator_progressCircle_text"> 100/<br>800 </div>
+                </div>
+            </div>
+            <div class="classField_1 spectator_playerIcon">
+                <div class="spectator_playerIcon_info">
+                    <img src="./Icons/icon_0.png" class="universal_iconImage">
+                    <br>
+                    <span class="spectator_playerIcon_name"> Duck </span>
+                </div>
+                <div class="spectator_progressCircle" style="--percentage: 180deg; --progress-color: #4caf50">
+                    <div class="spectator_progressCircle_text"> 100/<br>800 </div>
+                </div>
+            </div>
+            <div class="classField_1 spectator_playerIcon">
+                <div class="spectator_playerIcon_info">
+                    <img src="./Icons/icon_0.png" class="universal_iconImage">
+                    <br>
+                    <span class="spectator_playerIcon_name"> Duck </span>
+                </div>
+                <div class="spectator_progressCircle" style="--percentage: 180deg; --progress-color: #4caf50">
+                    <div class="spectator_progressCircle_text"> 100/<br>800 </div>
+                </div>
+            </div>
+            <div class="classField_1 spectator_playerIcon">
+                <div class="spectator_playerIcon_info">
+                    <img src="./Icons/icon_0.png" class="universal_iconImage">
+                    <br>
+                    <span class="spectator_playerIcon_name"> Duck </span>
+                </div>
+                <div class="spectator_progressCircle" style="--percentage: 180deg; --progress-color: #4caf50">
+                    <div class="spectator_progressCircle_text"> 100/<br>800 </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="JSCode/JSCode_unversalFunctions.js"></script>
@@ -21,3 +66,84 @@
 </body>
 
 </html>
+
+<!--
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Circle</title>
+    <style>
+        .progress-circle {
+            width: 120px;
+            height: 120px;
+            background: conic-gradient(var(--progress-color) var(--percentage), #e0e0e0 1%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .progress-circle::before {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .progress-text {
+            position: absolute;
+        }
+
+        input[type="range"] {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="progress-circle" style="--percentage: 75deg; --progress-color: #4caf50">
+        <div class="progress-text">75%</div>
+    </div>
+
+    <input type="range" min="0" max="100" value="75" oninput="SetProgress(this.value)">
+
+    <script>
+        function SetProgress(percentage) {
+            const circle = document.querySelector('.progress-circle');
+            const text = document.querySelector('.progress-text');
+            const angle = (percentage / 100) * 360;
+
+            // Колір від червоного до жовтого, оранжевого і зеленого
+            let color;
+            if (percentage < 50) {
+                // Від червоного до жовтого
+                const green = Math.round((percentage / 50) * 255);
+                color = `rgb(255, ${green}, 0)`;
+            } else {
+                // Від жовтого до зеленого
+                const red = Math.round(255 - ((percentage - 50) / 50) * 255);
+                color = `rgb(${red}, 255, 0)`;
+            }
+
+            circle.style.setProperty('--percentage', `${angle}deg`);
+            circle.style.setProperty('--progress-color', color);
+            text.textContent = `${percentage}%`;
+        }
+
+        // Початкове значення
+        SetProgress(75);
+    </script>
+
+</body>
+</html>
+
+-->
