@@ -184,10 +184,6 @@ async function StartGame() {
     window.location.href = "spectatorPage.html";
 }
 
-function getRandomInt(min, max) {
-    return min + Math.floor(Math.random() * max);
-}
-
 const clamp = (value, min, max) => {
     if (value < min) return min;
     if (value > max) return max;
