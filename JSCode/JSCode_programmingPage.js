@@ -26,7 +26,7 @@ let currentTask = "A";
 
 let setUpProfiles = false;
 
-let resultScoresOnTasks = new Map();
+let resultScoresOnTasks = {};
 let resultTextOnTasks = new Map();
 let codeOnTasks = new Map();
 
@@ -45,23 +45,27 @@ function Delay(ms) {
 }
 
 async function SomeAsyncFunction() {
-    let payload = await LoadData();
+    let allPlayers = await SendPost("RoomManager", "GetAllPlayers", { roomCode: ROOM_CODE });
+    let roomInfo = await SendPost("RoomManager", "GetRoomInfo", { roomCode: ROOM_CODE });
 
-    if (payload.roomsCodes.length < 1) window.location.href = "index.html";
+    if (allPlayers.status == 404 && allPlayers.description == "No room with this code!") window.location.href = "index.html";
+    if (allPlayers.status != 200) PopUpWindow(allPlayers.description);
+    if (roomInfo.status != 200) PopUpWindow(roomInfo.description);
 
-    SetTimer(payload);
+    SetTimer(roomInfo);
 
-    myTasks = payload.rooms[ROOM_CODE].players[THIS_PLAYER_INDEX].tasks;
-    enemyTasks = payload.rooms[ROOM_CODE].players[THIS_ENEMY_INDEX].tasks;
+    myTasks = allPlayers.players[THIS_PLAYER_INDEX].tasks;
+    enemyTasks = allPlayers.players[THIS_ENEMY_INDEX].tasks;
+    resultScoresOnTasks = allPlayers.players[THIS_PLAYER_INDEX].scoreOnTask;
 
-    RESULT_FIELD.innerText = resultTextOnTasks.get(currentTask);
+    RESULT_FIELD.innerText = resultScoresOnTasks[currentTask];
 
-    SetUpProfiles(payload);
+    SetUpProfiles(allPlayers, roomInfo);
 }
 
-function SetTimer(payload) {
-    const START_TIME = new Date(payload.rooms[ROOM_CODE].startTimeForTasks);
-    const TIME_FOR_TASKS = payload.rooms[ROOM_CODE].maxTimeForTasks;
+function SetTimer(roomInfo) {
+    const START_TIME = new Date(roomInfo.startTime);
+    const TIME_FOR_TASKS = roomInfo.maxTime;
     let currentTime = new Date();
     let elapsedMilliseconds = currentTime - START_TIME;
     
@@ -78,49 +82,35 @@ function SetTimer(payload) {
     TIMER_FIELD.innerText = `${formattedMinutes}:${formattedSeconds}`;
 }
 
-async function SaveNewScore() {
-    let payload = await LoadData();
+function SetUpProfiles(allPlayers, roomInfo) {
+    let playerScore = allPlayers.players[THIS_PLAYER_INDEX].score;
+    let enemyScore = allPlayers.players[THIS_ENEMY_INDEX].score;
+    let maxPossibleScore = roomInfo.maxTasks * 100;
 
-    const TASKS = payload.rooms[ROOM_CODE].players[THIS_PLAYER_INDEX].tasks;
-    let thisPlayerScore = 0;
-
-    for (let currentChar of TASKS) 
-        thisPlayerScore += resultScoresOnTasks.get(currentChar);
-
-    payload.rooms[ROOM_CODE].players[THIS_PLAYER_INDEX].score = thisPlayerScore;
-
-    await SaveData(payload);
-}
-
-function SetUpProfiles(payload) {
-    let playerScore = payload.rooms[ROOM_CODE].players[THIS_PLAYER_INDEX].score;
-    let enemyScore = payload.rooms[ROOM_CODE].players[THIS_ENEMY_INDEX].score;
-    let maxPosibleScore = payload.rooms[ROOM_CODE].maxCountOfTasks * 100;
-
-    PLAYER_PROFILE_SCORE.innerHTML = `${playerScore}/${maxPosibleScore}`;
-    ENEMY_PROFILE_SCORE.innerHTML = `${enemyScore}/${maxPosibleScore}`;
+    PLAYER_PROFILE_SCORE.innerHTML = `${playerScore}/${maxPossibleScore}`;
+    ENEMY_PROFILE_SCORE.innerHTML = `${enemyScore}/${maxPossibleScore}`;
 
     if (setUpProfiles) return;
     setUpProfiles = true;
 
-    let playerName = payload.rooms[ROOM_CODE].players[THIS_PLAYER_INDEX].name;
-    let enemyName = payload.rooms[ROOM_CODE].players[THIS_ENEMY_INDEX].name;
-    let playerIcon = payload.rooms[ROOM_CODE].players[THIS_PLAYER_INDEX].skin;
-    let enemyIcon = payload.rooms[ROOM_CODE].players[THIS_ENEMY_INDEX].skin;
+    let playerName = allPlayers.players[THIS_PLAYER_INDEX].name;
+    let enemyName = allPlayers.players[THIS_ENEMY_INDEX].name;
+    let playerIcon = allPlayers.players[THIS_PLAYER_INDEX].skin;
+    let enemyIcon = allPlayers.players[THIS_ENEMY_INDEX].skin;
 
     PLAYER_PROFILE_ICON.src = `./Icons/icon_${playerIcon}.png`;
     PLAYER_PROFILE_NAME.innerHTML = playerName + " (Ти)";
     ENEMY_PROFILE_ICON.src = `./Icons/icon_${enemyIcon}.png`;
     ENEMY_PROFILE_NAME.innerHTML = enemyName;
 
-    currentTask = payload.rooms[ROOM_CODE].players[THIS_PLAYER_INDEX].tasks[0];
+    currentTask = allPlayers.players[THIS_PLAYER_INDEX].tasks[0];
 
-    SetUpUI(payload);
+    SetUpUI(allPlayers);
     NewTask(currentTask);
 }
 
-async function SetUpUI(payload) {
-    const TASKS = payload.rooms[ROOM_CODE].players[THIS_PLAYER_INDEX].tasks;
+async function SetUpUI(allPlayers) {
+    const TASKS = allPlayers.players[THIS_PLAYER_INDEX].tasks;
 
     for (let currentChar of TASKS) {
         let taskButton = document.createElement("button");
@@ -135,7 +125,7 @@ async function SetUpUI(payload) {
 }
 
 async function NewTask(taskChar) {
-    const CURRENT_NEW_TASK = await FetchTask(GRADE_NUM, SET_OF_TASKS, taskChar);;
+    const CURRENT_NEW_TASK = await SendPost("CPPCompiler", "GetTask", { taskGrade:GRADE_NUM, taskSet:SET_OF_TASKS, task:taskChar });
     const CURRENT_TASK_EXAMPLES = CURRENT_NEW_TASK.examples;
 
     currentTask = taskChar;
@@ -202,21 +192,9 @@ async function UploadSolution() {
     let currentNewCode = EDITOR.innerText;
     let cleanedCode = CleanCode(currentNewCode);
 
-    let res = await SubmitSolution(GRADE_NUM, SET_OF_TASKS, currentTask, cleanedCode);
-    console.log(res);
+    let res = await SendPost("CPPCompiler", "SendTask", { roomCode:ROOM_CODE, playerIndex:THIS_PLAYER_INDEX, taskGrade:GRADE_NUM, taskSet:SET_OF_TASKS, task:currentTask, code:cleanedCode });
 
-    if (!res.compiled) { resultTextOnTasks.set(currentTask, res.errors); return; }
-
-    let countOfPassed = 0, countOfTests = res.results.length;
-
-    for (let currentResultIndex = 0; currentResultIndex < res.results.length; currentResultIndex++) {
-        if (res.results[currentResultIndex].passed) countOfPassed++;
-    }
-
-    resultScoresOnTasks.set(currentTask, Math.max(resultScoresOnTasks.get(currentTask), countOfPassed / countOfTests * 100));
-    resultTextOnTasks.set(currentTask, `${countOfPassed / countOfTests * 100}/100`);
-
-    SaveNewScore();
+    if (res.status != 200) return PopUpWindow(res.description);
 }
 
 function CleanCode(rawCode) {

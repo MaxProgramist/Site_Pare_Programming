@@ -68,7 +68,14 @@ async function SomeAsyncFunction() {
     }
 
     if (allPlayers[THIS_PLAYER_INDEX].cardGive) {
-        //TODO: Delete select card
+        let myCurrentTask = myTasks[myTasks.length-1];
+
+        for (let currentCard in DIV_LIST_OF_CARDS) {
+            if (currentCard.document.getElementById('taskLetter').innerHTML == `<font size="3"> Задача ${myCurrentTask} </font>`) {
+                currentCard.remove();
+                break;
+            }
+        }
 
         let playerTaskLatter = document.createElement("span");
         playerTaskLatter.innerHTML = myCurrentTask;
@@ -80,12 +87,12 @@ async function SomeAsyncFunction() {
         if (res.status != 200) return PopUpWindow(res.description);
     }
 
-    //TODO: Remake it to new fetch function ⬇️
     if (!cardMade) {
+        let res = await SendPost("CPPCompiler", "GetTasks", {taskGrade:GRADE_NUM, taskSet:SET_OF_TASKS});
+
         for (let i = 0; i < 16; i++) {
             let taskChar = String.fromCharCode('A'.charCodeAt(0) + i);
-            let res = await FetchTask(GRADE_NUM, SET_OF_TASKS, taskChar);
-            CreateCardWithTask(res, taskChar);
+            CreateCardWithTask(res[i], taskChar);
         }
         cardMade = !cardMade;
     }
@@ -102,6 +109,7 @@ function CreateCardWithTask(task, taskPeriod) {
     let taskName = document.createElement("p");
 
     taskLetter.innerHTML = `<font size="3"> Задача ${taskPeriod} </font>`;
+    taskLetter.id = 'taskLetter';
     taskName.innerHTML = `<font size="4"> ${task.name} </font>`;
 
     selectButton.innerHTML = "✓";
@@ -111,7 +119,7 @@ function CreateCardWithTask(task, taskPeriod) {
 
         if (res.status != 200) return PopUpWindow(res.description);
 
-        //TODO: Delete select card
+        taskCard.remove();
 
         let enemyTaskLatter = document.createElement("span");
         enemyTaskLatter.innerHTML = taskPeriod;
