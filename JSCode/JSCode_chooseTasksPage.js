@@ -100,7 +100,7 @@ async function SomeAsyncFunction() {
 
 function CreateCardWithTask(task, taskPeriod) {
     let taskCard = document.createElement("div");
-    taskCard.setAttribute('class', 'chooseTasks_cardOfTask');
+    taskCard.setAttribute('class', 'classField_1 chooseTasks_cardOfTask');
     taskCard.id = taskPeriod;
 
     let selectButton = document.createElement("button");
@@ -113,7 +113,7 @@ function CreateCardWithTask(task, taskPeriod) {
     taskName.innerHTML = `<font size="4"> ${task.name} </font>`;
 
     selectButton.innerHTML = "✓";
-    selectButton.setAttribute('class', 'chooseTasks_cardOfTask_button_select');
+    selectButton.setAttribute('class', 'button');
     selectButton.onclick = async function () {
         let res = await SendPost("RoomManager", "GiveTaskToPlayer", { roomCode: ROOM_CODE, playerIndex: THIS_PLAYER_ENEMY_INDEX, task: taskPeriod });
 
@@ -126,7 +126,7 @@ function CreateCardWithTask(task, taskPeriod) {
         ENEMY_SPAN_LIST_OF_TASKS.appendChild(enemyTaskLatter);
     };
     infoButton.innerHTML = "I";
-    infoButton.setAttribute('class', 'chooseTasks_cardOfTask_button_info');
+    infoButton.setAttribute('class', 'button');
     infoButton.onclick = () => FullTaskField(task, taskPeriod);
 
     taskCard.appendChild(taskLetter);
@@ -143,7 +143,7 @@ function FullTaskField(task, taskPeriod) {
     if (cardIsOpen) return;
 
     let fullTask = document.createElement("div");
-    fullTask.setAttribute('class', 'chooseTasks_fullTask');
+    fullTask.setAttribute('class', 'classField_2 chooseTasks_fullTask');
 
     let closeButton = document.createElement("button");
     let taskLetter = document.createElement("p");
@@ -154,16 +154,12 @@ function FullTaskField(task, taskPeriod) {
     taskName.innerHTML = ` <font size="4"> ${task.name} </font> `;
     taskCondition.innerHTML = ` <font size="3"> ${task.description} </font> `;
 
-    taskLetter.setAttribute('class', 'chooseTasks_fullTask_p_letter');
-    taskName.setAttribute('class', 'chooseTasks_fullTask_p_name');
-    taskCondition.setAttribute('class', 'chooseTasks_fullTask_p_condition');
-
     closeButton.innerHTML = "✕";
     closeButton.onclick = function () {
         fullTask.remove();
         cardIsOpen = false;
     };
-    closeButton.setAttribute('class', 'chooseTasks_fullTask_button_close');
+    closeButton.setAttribute('class', 'button');
 
     fullTask.appendChild(taskLetter);
     fullTask.appendChild(taskName);
