@@ -206,6 +206,25 @@ input[type="number"]::-webkit-inner-spin-button {
     display: none;
 }
 
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--color_button_inactive));
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--color_button_main));
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--color_button_hover))
+}
+
 /*#endregion */
 
 /*#region Index */
@@ -471,7 +490,6 @@ input[type="number"]::-webkit-inner-spin-button {
 /*#region Programming */
 
 .programming_wrapper {
-    background: #fbfbfb;
     height: 100vh;
     display: grid;
     grid-template-columns: 6fr 5fr;
@@ -485,8 +503,6 @@ input[type="number"]::-webkit-inner-spin-button {
 
     width: 100%;
     height: 100%;
-    background: #333;
-    color: white;
     display: flex;
 
     align-items: center;
@@ -495,6 +511,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
     top: 0;
     left: 0;
+    padding: 0;
 }
 
 .programming_playerStats,
@@ -510,7 +527,6 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .programming_editorField {
-    background: #c9c9c9;
     grid-row-start: 2;
     grid-row-end: 4;
 
@@ -522,16 +538,19 @@ input[type="number"]::-webkit-inner-spin-button {
 
     right: 15px;
     top: 84px;
+
+    padding: 0;
+    padding-left: 10px;
+    padding-left: 10px;
 }
 
 .programming_editor {
-    width: calc(100% - 6px - 10px);
-    height: calc(100% - 25px - 6px - 10px - 17px);
-    border: 5px solid #5b5b5b;
-    padding: 3px;
+    width: 90%;
+    height: 70%;
     overflow: auto;
     white-space: pre;
     word-wrap: normal;
+    font-size: 9px;
 }
 
 .programming_submitButton {
@@ -541,7 +560,7 @@ input[type="number"]::-webkit-inner-spin-button {
 .programming_tasksButtons {
     width: 100%;
     height: 100%;
-    background: #dfdfdf;
+    padding: 0;
 }
 
 .programming_result {
@@ -556,24 +575,27 @@ input[type="number"]::-webkit-inner-spin-button {
 
     overflow: auto;
     overflow-wrap: anywhere;
+
+    padding: 0;
 }
 
 .programming_tasksField {
     grid-row-start: 3;
     grid-row-end: 5;
 
-    padding: 10px;
+    padding: 5px;
     width: calc(100% - 20px);
     height: calc(100% - 20px);
-    background: #dfdfdf;
     line-height: 1;
     overflow-y: auto;
     overflow-wrap: anywhere;
+
+    padding: 0;
+    padding-left: 15px;
 }
 
 .programming_limits {
     display: inline-block;
-    background: #c9c9c9;
     border-radius: 10px;
     padding: 10px;
     margin: -6px;
@@ -581,7 +603,6 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .programming_examples {
-    background: #c9c9c9;
     padding: 15px;
     margin: 10px;
     border-radius: 10px;
