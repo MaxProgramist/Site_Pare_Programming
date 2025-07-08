@@ -177,7 +177,7 @@ async function StartGame() {
     if (payload.players.length < 1)
         return PopUpWindow("Count of players is to small (at least 2)");
 
-    let res = await SendPost("RoomManager", "StartGame", { roomCode: ROOM_CODE, setOfTasks: currentSetOfTasks, maxTasks: COUNT_OF_TASKS_INPUT.value, grade: currentGrade, timeForTasks: timeForTasksInMinutes });
+    let res = await SendPost("RoomManager", "StartGame", { roomCode: ROOM_CODE, setOfTasks: currentSetOfTasks, maxTasks: int(COUNT_OF_TASKS_INPUT.value), grade: currentGrade, timeForTasks: timeForTasksInMinutes });
 
     if (res.status != 200) return PopUpWindow(res.description);
 
