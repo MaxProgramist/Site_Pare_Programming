@@ -61,7 +61,7 @@ function UpdatePlayerSkin(payload, playerIndex) {
     let imgInsideDiv = playerDiv.querySelector("img");
     let pInsideDiv = playerDiv.querySelector("p");
     imgInsideDiv.src = ICONS_LIST[playerSkin];
-    if (playerIndex == payload.length - THIS_PLAYER_INDEX)
+    if (playerIndex == payload.length - THIS_PLAYER_INDEX - 1)
         pInsideDiv.textContent = playerName + " (Ти)";
     else
         pInsideDiv.textContent = playerName;
