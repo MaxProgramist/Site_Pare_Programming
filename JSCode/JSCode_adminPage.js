@@ -181,6 +181,8 @@ async function StartGame() {
 
     if (res.status != 200) return PopUpWindow(res.description);
 
+    console.log("Spectate");
+
     window.location.href = "spectatorPage.html";
 }
 
