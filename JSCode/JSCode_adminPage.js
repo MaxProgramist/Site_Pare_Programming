@@ -50,20 +50,9 @@ function Delay(ms) {
 
 async function SomeAsyncFunction() {
     let payload = await SendPost("RoomManager", "GetAllPlayers", { roomCode: ROOM_CODE });
-    let roomInfo = await SendPost("RoomManager", "GetRoomInfo", { roomCode: ROOM_CODE });
 
     if (payload.status == 404 && payload.description == "No room with this code!") window.location.href = "index.html";
     if (payload.status != 200) PopUpWindow(payload.description);
-
-    if (roomInfo.isStartedGame)
-    {
-        await sessionStorage.setItem("gradeNum", roomInfo.grade);
-        await sessionStorage.setItem("setOfTasks", roomInfo.taskSet);
-        await sessionStorage.setItem("playerIndex", THIS_PLAYER_INDEX);
-        await sessionStorage.setItem("enemyIndex", allPlayers[THIS_PLAYER_INDEX].enemy);
-
-        window.location.href = "spectatorPage.html";
-    }
 
     TIME_FIELD.innerText = timeForTasksInMinutes;
     COUNT_OF_TASKS_INPUT.value = clamp(COUNT_OF_TASKS_INPUT.value, 1, 8);
@@ -188,7 +177,7 @@ async function StartGame() {
     if (payload.players.length < 1)
         return PopUpWindow("Count of players is to small (at least 2)");
 
-    let res = await SendPost("RoomManager", "StartGame", { roomCode: ROOM_CODE, setOfTasks: currentSetOfTasks, maxTasks: parseInt(COUNT_OF_TASKS_INPUT.value), grade: currentGrade, timeForTasks: timeForTasksInMinutes });
+    let res = await SendPost("RoomManager", "StartGame", { roomCode: ROOM_CODE, setOfTasks: currentSetOfTasks, maxTasks: parseInt(COUNT_OF_TASKS_INPUT.value), grade: parseInt(currentGrade), timeForTasks: parseInt(timeForTasksInMinutes) });
 
     if (res.status != 200) return PopUpWindow(res.description);
 
