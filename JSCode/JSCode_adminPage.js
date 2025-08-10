@@ -40,6 +40,7 @@ async function Loop() {
     while (true) {
         await SomeAsyncFunction();
         await Delay(100);
+        await WakeUpServers();
     }
 }
 
