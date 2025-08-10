@@ -31,7 +31,7 @@ async function SomeAsyncFunction() {
     if (allPlayers.status != 200) PopUpWindow(allPlayers.description);
     if (roomInfo.status != 200) PopUpWindow(roomInfo.description);
 
-    console.log(allPlayers);
+    console.log(roomInfo.isStartedGame);
 
     if (roomInfo.isStartedGame)
     {
@@ -44,7 +44,7 @@ async function SomeAsyncFunction() {
     }
 
     for (let i = 0; i < divToPlayer.length; i++)
-        UpdatePlayerSkin(allPlayers.players, i);
+        UpdatePlayerSkin(allPlayers.players, allPlayers.players.length - i - 1);
 
     while (allPlayers.players.length > currentRoomPlayers) {
         NewPlayerIcon(allPlayers.players, currentRoomPlayers);
@@ -61,7 +61,7 @@ function UpdatePlayerSkin(payload, playerIndex) {
     let imgInsideDiv = playerDiv.querySelector("img");
     let pInsideDiv = playerDiv.querySelector("p");
     imgInsideDiv.src = ICONS_LIST[playerSkin];
-    if (playerIndex == payload.length - THIS_PLAYER_INDEX - 1)
+    if (playerIndex == THIS_PLAYER_INDEX)
         pInsideDiv.textContent = playerName + " (Ти)";
     else
         pInsideDiv.textContent = playerName;
