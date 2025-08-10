@@ -36,7 +36,7 @@ Loop();
 async function Loop() {
     while (true) {
         await SomeAsyncFunction();
-        await Delay(75);
+        await Delay(1000);
     }
 }
 
