@@ -50,9 +50,20 @@ function Delay(ms) {
 
 async function SomeAsyncFunction() {
     let payload = await SendPost("RoomManager", "GetAllPlayers", { roomCode: ROOM_CODE });
+    let roomInfo = await SendPost("RoomManager", "GetRoomInfo", { roomCode: ROOM_CODE });
 
     if (payload.status == 404 && payload.description == "No room with this code!") window.location.href = "index.html";
     if (payload.status != 200) PopUpWindow(payload.description);
+
+    if (roomInfo.isStartedGame)
+    {
+        await sessionStorage.setItem("gradeNum", roomInfo.grade);
+        await sessionStorage.setItem("setOfTasks", roomInfo.taskSet);
+        await sessionStorage.setItem("playerIndex", THIS_PLAYER_INDEX);
+        await sessionStorage.setItem("enemyIndex", allPlayers[THIS_PLAYER_INDEX].enemy);
+
+        window.location.href = "spectatorPage.html";
+    }
 
     TIME_FIELD.innerText = timeForTasksInMinutes;
     COUNT_OF_TASKS_INPUT.value = clamp(COUNT_OF_TASKS_INPUT.value, 1, 8);
