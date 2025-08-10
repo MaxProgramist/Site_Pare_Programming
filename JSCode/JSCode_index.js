@@ -66,4 +66,5 @@ function RandomString(length) {
 
 async function WakeUpServersButton() {
     await WakeUpServers();
+    return PopUpWindow("Servers are awake!", "./Icons/WakeUpIcon.png");
 }
