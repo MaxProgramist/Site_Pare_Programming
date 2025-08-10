@@ -36,7 +36,6 @@ var currentRoomPlayers = 0;
 
 Loop();
 
-
 async function Loop() {
     while (true) {
         await SomeAsyncFunction();
