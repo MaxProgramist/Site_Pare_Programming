@@ -41,7 +41,7 @@ function ChangePlayersScore(playerInfo, roomInfo, playerIndex) {
     let playerScore = playerInfo.players[playerIndex].score;
 
     let pInsideDiv = playerDiv.querySelectorAll('div.spectator_progressCircle_text');
-    pInsideDiv[0].textContent = `${playerScore}/<br>${roomInfo.maxTasks * 100}`;
+    pInsideDiv[0].innerHTML = `${playerScore}/<br>${roomInfo.maxTasks * 100}`;
 
     SetProgress(playerScore/roomInfo.maxTasks*100 ,playerIndex);
 }
