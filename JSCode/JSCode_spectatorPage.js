@@ -114,8 +114,8 @@ function NewPlayerIcon(payload, roomInfo, playerIndex) {
     playerInfo.appendChild(document.createElement("br"));
     playerInfo.appendChild(playerBoxName);
 
-    playerBoxProfile.appendChild(playerInfo);
-    playerBoxProfile.appendChild(progressCircle);
+    playerBox.appendChild(playerInfo);
+    playerBox.appendChild(progressCircle);
 
     divToPlayer[playerIndex] = playerBox;
     playersCircles[playerIndex] = progressCircle;
