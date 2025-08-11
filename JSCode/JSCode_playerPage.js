@@ -31,7 +31,7 @@ async function SomeAsyncFunction() {
     if (allPlayers.status != 200) PopUpWindow(allPlayers.description);
     if (roomInfoPost.status != 200) PopUpWindow(roomInfoPost.description);
 
-    let roomInfo = roomInfo.roomInfo;
+    let roomInfo = roomInfoPost.roomInfo;
 
     console.log(roomInfo.isStartedGame);
 
