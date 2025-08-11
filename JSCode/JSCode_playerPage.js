@@ -33,14 +33,14 @@ async function SomeAsyncFunction() {
 
     let roomInfo = roomInfoPost.roomInfo;
 
-    console.log(roomInfo.isStartedGame);
+    console.log(allPlayers.players[THIS_PLAYER_INDEX].enemy);
 
     if (roomInfo.isStartedGame)
     {
         await sessionStorage.setItem("gradeNum", roomInfo.grade);
         await sessionStorage.setItem("setOfTasks", roomInfo.taskSet);
         await sessionStorage.setItem("playerIndex", THIS_PLAYER_INDEX);
-        await sessionStorage.setItem("enemyIndex", allPlayers.players[THIS_PLAYER_INDEX].name);
+        await sessionStorage.setItem("enemyIndex", allPlayers.players[THIS_PLAYER_INDEX].enemy);
 
         window.location.href = "chooseTasksPage.html";
     }
