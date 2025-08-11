@@ -100,13 +100,13 @@ function NewPlayerIcon(payload, roomInfo, playerIndex) {
 
     let playerBoxScore = document.createElement("div");
     playerBoxScore.innerText = `0/${roomInfo.maxCountOfTasks * 100}`;
-    playerBoxName.setAttribute('class', 'spectator_progressCircle_text');
+    playerBoxScore.setAttribute('class', 'spectator_progressCircle_text');
 
     let progressCircle = document.createElement("div");
-    playerBox.setAttribute('class', 'spectator_progressCircle');
+    progressCircle.setAttribute('class', 'spectator_progressCircle');
 
     let playerInfo = document.createElement("div");
-    playerBox.setAttribute('class', 'spectator_playerIcon_info');
+    playerInfo.setAttribute('class', 'spectator_playerIcon_info');
 
     progressCircle.appendChild(playerBoxScore);
 

@@ -154,7 +154,6 @@ async function SetOfTasksMenu() {
     }
 }
 
-
 async function ChangeGradeOfRoom(numberOfGrade) {
     currentGrade = numberOfGrade;
     GRADE_TEXT_FIELD.innerText = "Клас:" + numberOfGrade;
