@@ -49,20 +49,21 @@ function Delay(ms) {
 
 async function SomeAsyncFunction() {
     let allPlayers = await SendPost("RoomManager", "GetAllPlayers", { roomCode: ROOM_CODE });
-    let roomInfo = (await SendPost("RoomManager", "GetRoomInfo", { roomCode: ROOM_CODE })).roomInfo;
+    let roomInfoPost = (await SendPost("RoomManager", "GetRoomInfo", { roomCode: ROOM_CODE })).roomInfo;
 
     if (allPlayers.status == 404 && allPlayers.description == "No room with this code!") window.location.href = "index.html";
     if (allPlayers.status != 200) PopUpWindow(allPlayers.description);
-    if (roomInfo.status != 200) PopUpWindow(roomInfo.description);
+    if (roomInfoPost.status != 200) PopUpWindow(roomInfoPost.description);
 
     let myTasks = allPlayers.players[THIS_PLAYER_INDEX].tasks;
     let enemyTasks = allPlayers.players[THIS_PLAYER_ENEMY_INDEX].tasks;
+    let roomInfo = roomInfoPost.roomInfo;
 
     if (myTasks.length == roomInfo.maxTasks && enemyTasks.length == payload.maxTasks) {
-        await sessionStorage.setItem("gradeNum", payload.rooms[ROOM_CODE].grade);
-        await sessionStorage.setItem("setOfTasks", payload.rooms[ROOM_CODE].numberOfTasksSet);
+        await sessionStorage.setItem("gradeNum", roomInfo.grade);
+        await sessionStorage.setItem("setOfTasks", roomInfo.numberOfTasksSet);
         await sessionStorage.setItem("playerIndex", THIS_PLAYER_INDEX);
-        await sessionStorage.setItem("enemyIndex", payload.rooms[ROOM_CODE].players[THIS_PLAYER_INDEX].enemy);
+        await sessionStorage.setItem("enemyIndex", allPlayers.players[THIS_PLAYER_INDEX].enemy);
 
         window.location.href = "programmingPage.html";
     }
