@@ -20,15 +20,15 @@ var listOfEnemyLetter = [];
 var cardMade = false;
 var cardIsOpen = false;
 
-Loop();
 SetUpProfiles();
+Loop();
 
 
 async function SetUpProfiles() {
     let allPlayers = await SendPost("RoomManager", "GetAllPlayers", { roomCode: ROOM_CODE });
 
     let playerProfile = allPlayers.players[THIS_PLAYER_INDEX];
-    let enemyProfile = allPlayers.players[playerProfile.enemy];
+    let enemyProfile = allPlayers.players[THIS_PLAYER_ENEMY_INDEX];
 
     PLAYER_PROFILE_ICON.src = ICONS_LIST[playerProfile.skin];
     PLAYER_PROFILE_NAME.innerHTML = playerProfile.name + " (Ти)";
@@ -49,7 +49,7 @@ function Delay(ms) {
 
 async function SomeAsyncFunction() {
     let allPlayers = await SendPost("RoomManager", "GetAllPlayers", { roomCode: ROOM_CODE });
-    let roomInfoPost = (await SendPost("RoomManager", "GetRoomInfo", { roomCode: ROOM_CODE })).roomInfo;
+    let roomInfoPost = await SendPost("RoomManager", "GetRoomInfo", { roomCode: ROOM_CODE });
 
     if (allPlayers.status == 404 && allPlayers.description == "No room with this code!") window.location.href = "index.html";
     if (allPlayers.status != 200) PopUpWindow(allPlayers.description);
@@ -59,12 +59,7 @@ async function SomeAsyncFunction() {
     let enemyTasks = allPlayers.players[THIS_PLAYER_ENEMY_INDEX].tasks;
     let roomInfo = roomInfoPost.roomInfo;
 
-    if (myTasks.length == roomInfo.maxTasks && enemyTasks.length == payload.maxTasks) {
-        await sessionStorage.setItem("gradeNum", roomInfo.grade);
-        await sessionStorage.setItem("setOfTasks", roomInfo.numberOfTasksSet);
-        await sessionStorage.setItem("playerIndex", THIS_PLAYER_INDEX);
-        await sessionStorage.setItem("enemyIndex", allPlayers.players[THIS_PLAYER_INDEX].enemy);
-
+    if (myTasks.length == roomInfo.maxTasks && enemyTasks.length == roomInfo.maxTasks) {
         window.location.href = "programmingPage.html";
     }
 
