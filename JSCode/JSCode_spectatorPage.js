@@ -23,13 +23,13 @@ function Delay(ms) {
 
 async function SomeAsyncFunction() {
     let allPlayers = await SendPost("RoomManager", "GetAllPlayers", { roomCode: ROOM_CODE });
-    let roomInfo = await SendPost("RoomManager", "GetRoomInfo", { roomCode: ROOM_CODE });
+    let roomInfo = (await SendPost("RoomManager", "GetRoomInfo", { roomCode: ROOM_CODE })).roomInfo;
 
-    if (payload.status == 404 && payload.description == "No room with this code!") window.location.href = "index.html";
-    if (payload.status != 200) PopUpWindow(payload.description);
+    if (allPlayers.status == 404 && allPlayers.description == "No room with this code!") window.location.href = "index.html";
+    if (allPlayers.status != 200) PopUpWindow(allPlayers.description);
 
-    for (let i = 0; i < payload.players.length; i++)
-        ChangePlayersScore(payload, roomInfo, i);
+    for (let i = 0; i < allPlayers.players.length; i++)
+        ChangePlayersScore(allPlayers, roomInfo, i);
 }
 
 function ChangePlayersScore(playerInfo, roomInfo, playerIndex) {
