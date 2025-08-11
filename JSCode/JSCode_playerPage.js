@@ -40,7 +40,7 @@ async function SomeAsyncFunction() {
         await sessionStorage.setItem("gradeNum", roomInfo.grade);
         await sessionStorage.setItem("setOfTasks", roomInfo.taskSet);
         await sessionStorage.setItem("playerIndex", THIS_PLAYER_INDEX);
-        await sessionStorage.setItem("enemyIndex", allPlayers.players[THIS_PLAYER_INDEX].enemy);
+        await sessionStorage.setItem("enemyIndex", allPlayers.players[THIS_PLAYER_INDEX].name);
 
         window.location.href = "chooseTasksPage.html";
     }
