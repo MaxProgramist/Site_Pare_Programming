@@ -25,13 +25,13 @@ function Delay(ms) {
 
 async function SomeAsyncFunction() {
     let allPlayers = await SendPost("RoomManager", "GetAllPlayers", { roomCode: ROOM_CODE });
-    let roomInfo = await SendPost("RoomManager", "GetRoomInfo", { roomCode: ROOM_CODE });
+    let roomInfoPost = await SendPost("RoomManager", "GetRoomInfo", { roomCode: ROOM_CODE });
 
     if (allPlayers.status == 404 && allPlayers.description == "No room with this code!") window.location.href = "index.html";
     if (allPlayers.status != 200) PopUpWindow(allPlayers.description);
-    if (roomInfo.status != 200) PopUpWindow(roomInfo.description);
+    if (roomInfoPost.status != 200) PopUpWindow(roomInfoPost.description);
 
-    roomInfo = roomInfo.roomInfo;
+    let roomInfo = roomInfo.roomInfo;
 
     console.log(roomInfo.isStartedGame);
 
@@ -46,7 +46,7 @@ async function SomeAsyncFunction() {
     }
 
     for (let i = 0; i < divToPlayer.length; i++)
-        UpdatePlayerSkin(allPlayers.players, allPlayers.players.length - i - 1);
+        UpdatePlayerSkin(allPlayers.players, i);
 
     while (allPlayers.players.length > currentRoomPlayers) {
         NewPlayerIcon(allPlayers.players, currentRoomPlayers);
