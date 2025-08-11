@@ -63,7 +63,7 @@ async function SomeAsyncFunction() {
         window.location.href = "programmingPage.html";
     }
 
-    if (allPlayers[THIS_PLAYER_INDEX].cardGive) {
+    if (allPlayers.players[THIS_PLAYER_INDEX].cardGive) {
         let myCurrentTask = myTasks[myTasks.length-1];
 
         for (let currentCard in DIV_LIST_OF_CARDS) {
