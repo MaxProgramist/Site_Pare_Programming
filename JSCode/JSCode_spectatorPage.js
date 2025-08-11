@@ -23,10 +23,13 @@ function Delay(ms) {
 
 async function SomeAsyncFunction() {
     let allPlayers = await SendPost("RoomManager", "GetAllPlayers", { roomCode: ROOM_CODE });
-    let roomInfo = (await SendPost("RoomManager", "GetRoomInfo", { roomCode: ROOM_CODE })).roomInfo;
+    let roomInfoPost = (await SendPost("RoomManager", "GetRoomInfo", { roomCode: ROOM_CODE }));
 
     if (allPlayers.status == 404 && allPlayers.description == "No room with this code!") window.location.href = "index.html";
     if (allPlayers.status != 200) PopUpWindow(allPlayers.description);
+    if (roomInfoPost.status != 200) PopUpWindow(roomInfoPost.description);
+    
+    let roomInfo = roomInfoPost.roomInfo;
 
     for (let i = 0; i < allPlayers.players.length; i++)
         ChangePlayersScore(allPlayers, roomInfo, i);
@@ -44,19 +47,22 @@ function ChangePlayersScore(playerInfo, roomInfo, playerIndex) {
 }
 
 async function MakePlayersGroups() {
-    let payload = await SendPost("RoomManager", "GetAllPlayers", { roomCode: ROOM_CODE });
+    let allPlayers = await SendPost("RoomManager", "GetAllPlayers", { roomCode: ROOM_CODE });
+    let roomInfoPost = (await SendPost("RoomManager", "GetRoomInfo", { roomCode: ROOM_CODE }));
+    let roomInfo = roomInfoPost.roomInfo;
 
-    if (payload.status == 404 && payload.description == "No room with this code!") window.location.href = "index.html";
-    if (payload.status != 200) return PopUpWindow(payload.description);
+    if (allPlayers.status == 404 && allPlayers.description == "No room with this code!") window.location.href = "index.html";
+    if (allPlayers.status != 200) return PopUpWindow(allPlayers.description);
+    if (roomInfoPost.status != 200) PopUpWindow(roomInfoPost.description);
 
     let usedPlayers = [];
-    for (let i = 0; i < payload.players.length; i++) {
+    for (let i = 0; i < allPlayers.players.length; i++) {
         if (usedPlayers.includes(i)) continue;
 
-        NewPlayerIcon(payload, i);
-        NewPlayerIcon(payload, payload.players[i].enemy);
+        NewPlayerIcon(payload, roomInfo, i);
+        NewPlayerIcon(allPlayers, roomInfo, payload.players[i].enemy);
         usedPlayers.push(i);
-        usedPlayers.push(payload.rooms[ROOM_CODE].players[i].enemy);
+        usedPlayers.push(payload.players[i].enemy);
     }
 }
 
@@ -77,7 +83,7 @@ function SetProgress(percentage, circleIndex) {
     CIRCLE.style.setProperty('--progress-color', color);
 }
 
-function NewPlayerIcon(payload, playerIndex) {
+function NewPlayerIcon(payload, roomInfo, playerIndex) {
     let playerName = payload.players[playerIndex].name;
     let playerSkin = payload.players[playerIndex].skin; 
 
@@ -93,7 +99,7 @@ function NewPlayerIcon(payload, playerIndex) {
     playerBoxName.setAttribute('class', 'spectator_playerIcon_name');
 
     let playerBoxScore = document.createElement("div");
-    playerBoxScore.innerText = `0/${payload.rooms[ROOM_CODE].maxCountOfTasks * 100}`;
+    playerBoxScore.innerText = `0/${roomInfo.maxCountOfTasks * 100}`;
     playerBoxName.setAttribute('class', 'spectator_progressCircle_text');
 
     let progressCircle = document.createElement("div");

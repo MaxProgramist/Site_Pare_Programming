@@ -33,8 +33,6 @@ async function SomeAsyncFunction() {
 
     let roomInfo = roomInfoPost.roomInfo;
 
-    console.log(allPlayers.players[THIS_PLAYER_INDEX].enemy);
-
     if (roomInfo.isStartedGame)
     {
         await sessionStorage.setItem("gradeNum", roomInfo.grade);
