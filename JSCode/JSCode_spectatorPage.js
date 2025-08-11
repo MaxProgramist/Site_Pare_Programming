@@ -59,10 +59,10 @@ async function MakePlayersGroups() {
     for (let i = 0; i < allPlayers.players.length; i++) {
         if (usedPlayers.includes(i)) continue;
 
-        NewPlayerIcon(payload, roomInfo, i);
-        NewPlayerIcon(allPlayers, roomInfo, payload.players[i].enemy);
+        NewPlayerIcon(allPlayers, roomInfo, i);
+        NewPlayerIcon(allPlayers, roomInfo, allPlayers.players[i].enemy);
         usedPlayers.push(i);
-        usedPlayers.push(payload.players[i].enemy);
+        usedPlayers.push(allPlayers.players[i].enemy);
     }
 }
 
