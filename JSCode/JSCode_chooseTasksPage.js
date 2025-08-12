@@ -87,6 +87,8 @@ async function SomeAsyncFunction() {
         let res = await SendPost("CPPCompiler", "GetTasks", {taskGrade:GRADE_NUM, taskSet:SET_OF_TASKS});
         let letter = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P'];
 
+        if (res.status != 200) return PopUpWindow(res.description);
+
         for (let i = 0; i < 16; i++) {
             CreateCardWithTask(res.tasks[i], letter[i]);
         }
