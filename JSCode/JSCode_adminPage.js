@@ -28,7 +28,7 @@ SET_OF_TASKS_DIV_LIST_GRADE_11.style.display = "none";
 let divToPlayer = [];
 let timeForTasksInMinutes = 45;
 
-let currentSetOfTasks = "linear_1";
+let currentSetOfTasks = "linar_1";
 let currentGrade = 8;
 let currentMaxTasks = 8;
 
