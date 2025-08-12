@@ -12,7 +12,7 @@ Loop();
 async function Loop() {
     while (true) {
         await SomeAsyncFunction();
-        await Delay(1000);
+        await Delay(300);
         await WakeUpServers();
     }
 }
@@ -85,7 +85,7 @@ function SetProgress(percentage, circleIndex) {
 
 function NewPlayerIcon(payload, roomInfo, playerIndex) {
     let playerName = payload.players[playerIndex].name;
-    let playerSkin = payload.players[playerIndex].skin; 
+    let playerSkin = payload.players[playerIndex].icon; 
 
     let playerBox = document.createElement("div");
     playerBox.setAttribute('class', 'classField_1 spectator_playerIcon');

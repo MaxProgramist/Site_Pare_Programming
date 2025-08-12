@@ -30,9 +30,9 @@ async function SetUpProfiles() {
     let playerProfile = allPlayers.players[THIS_PLAYER_INDEX];
     let enemyProfile = allPlayers.players[THIS_PLAYER_ENEMY_INDEX];
 
-    PLAYER_PROFILE_ICON.src = ICONS_LIST[playerProfile.skin];
+    PLAYER_PROFILE_ICON.src = ICONS_LIST[playerProfile.icon];
     PLAYER_PROFILE_NAME.innerHTML = playerProfile.name + " (Ти)";
-    ENEMY_PROFILE_ICON.src = ICONS_LIST[enemyProfile.skin];
+    ENEMY_PROFILE_ICON.src = ICONS_LIST[enemyProfile.icon];
     ENEMY_PROFILE_NAME.innerHTML = enemyProfile.name;
 }
 
