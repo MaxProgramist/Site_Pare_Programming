@@ -88,7 +88,7 @@ async function SomeAsyncFunction() {
 
         for (let i = 0; i < 16; i++) {
             let taskChar = String.fromCharCode('A'.charCodeAt(0) + i);
-            CreateCardWithTask(res[i], taskChar);
+            CreateCardWithTask(res.tasks[i], taskChar);
         }
         cardMade = !cardMade;
     }
