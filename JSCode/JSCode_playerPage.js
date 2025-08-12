@@ -35,10 +35,10 @@ async function SomeAsyncFunction() {
 
     if (roomInfo.isStartedGame)
     {
-        await sessionStorage.setItem("gradeNum", parseInt(roomInfo.grade));
+        await sessionStorage.setItem("gradeNum", roomInfo.grade);
         await sessionStorage.setItem("setOfTasks", roomInfo.taskSet);
         await sessionStorage.setItem("playerIndex", parseInt(THIS_PLAYER_INDEX));
-        await sessionStorage.setItem("enemyIndex", parseInt(allPlayers.players[THIS_PLAYER_INDEX].enemy));
+        await sessionStorage.setItem("enemyIndex", allPlayers.players[THIS_PLAYER_INDEX].enemy);
 
         window.location.href = "chooseTasksPage.html";
     }
