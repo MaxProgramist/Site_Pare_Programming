@@ -84,13 +84,18 @@ async function SomeAsyncFunction() {
     }
 
     if (!cardMade) {
-        let res = await SendPost("CPPCompiler", "GetTasks", {taskGrade:GRADE_NUM, taskSet:SET_OF_TASKS});
+        let tasksInformation = await SendPost("CPPCompiler", "GetTasks", {taskGrade:GRADE_NUM, taskSet:SET_OF_TASKS});
         let letter = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P'];
 
-        if (res.status != 200) return PopUpWindow(res.description);
+        console.log("Status of Post:" + tasksInformation.status);
+        console.log("Description of Post:" + tasksInformation.description);
+        console.log();
+        console.log();
+
+        if (tasksInformation.status != 200) return PopUpWindow(tasksInformation.description);
 
         for (let i = 0; i < 16; i++) {
-            CreateCardWithTask(res.tasks[i], letter[i]);
+            CreateCardWithTask(tasksInformation.tasks[i], letter[i]);
         }
         cardMade = !cardMade;
     }
