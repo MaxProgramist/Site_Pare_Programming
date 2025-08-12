@@ -87,7 +87,7 @@ async function SomeAsyncFunction() {
         let res = await SendPost("CPPCompiler", "GetTasks", {taskGrade:GRADE_NUM, taskSet:SET_OF_TASKS});
 
         for (let i = 0; i < 16; i++) {
-            let taskChar = String.fromCharCode('A'.charCodeAt(0) + i);
+            let taskChar = String.fromCharCode("A".charCodeAt(0) + i);
             CreateCardWithTask(res.tasks[i], taskChar);
         }
         cardMade = !cardMade;
