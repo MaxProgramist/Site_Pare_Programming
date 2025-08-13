@@ -189,7 +189,7 @@ async function UploadSolution() {
     let currentNewCode = EDITOR.innerText;
     let cleanedCode = CleanCode(currentNewCode);
 
-    let res = await SendPost("CPPCompiler", "SendTask", { roomCode:ROOM_CODE, playerIndex:THIS_PLAYER_INDEX, taskGrade:GRADE_NUM, taskSet:SET_OF_TASKS, task:currentTask, code:cleanedCode });
+    let res = await SendPost("CPPCompiler", "SendTask", { roomCode:ROOM_CODE, playerIndex:parseInt(THIS_PLAYER_INDEX), taskGrade:GRADE_NUM, taskSet:SET_OF_TASKS, task:currentTask, code:cleanedCode });
 
     if (res.status != 200) return PopUpWindow(res.description);
 }
