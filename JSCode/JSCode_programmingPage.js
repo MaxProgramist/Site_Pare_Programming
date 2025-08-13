@@ -32,7 +32,6 @@ let codeOnTasks = new Map();
 
 Loop();
 
-
 async function Loop() {
     while (true) {
         await SomeAsyncFunction();
@@ -46,11 +45,12 @@ function Delay(ms) {
 
 async function SomeAsyncFunction() {
     let allPlayers = await SendPost("RoomManager", "GetAllPlayers", { roomCode: ROOM_CODE });
-    let roomInfo = (await SendPost("RoomManager", "GetRoomInfo", { roomCode: ROOM_CODE })).roomInfo;
+    let roomInfoPost = await SendPost("RoomManager", "GetRoomInfo", { roomCode: ROOM_CODE });
+    let roomInfo = roomInfoPost.roomInfo;
 
     if (allPlayers.status == 404 && allPlayers.description == "No room with this code!") window.location.href = "index.html";
     if (allPlayers.status != 200) PopUpWindow(allPlayers.description);
-    if (roomInfo.status != 200) PopUpWindow(roomInfo.description);
+    if (roomInfoPost.status != 200) PopUpWindow(roomInfoPost.description);
 
     SetTimer(roomInfo);
 
@@ -95,29 +95,26 @@ function SetUpProfiles(allPlayers, roomInfo) {
 
     let playerName = allPlayers.players[THIS_PLAYER_INDEX].name;
     let enemyName = allPlayers.players[THIS_ENEMY_INDEX].name;
-    let playerIcon = allPlayers.players[THIS_PLAYER_INDEX].skin;
-    let enemyIcon = allPlayers.players[THIS_ENEMY_INDEX].skin;
+    let playerIcon = allPlayers.players[THIS_PLAYER_INDEX].icon;
+    let enemyIcon = allPlayers.players[THIS_ENEMY_INDEX].icon;
 
-    PLAYER_PROFILE_ICON.src = `./Icons/icon_${playerIcon}.png`;
+    PLAYER_PROFILE_ICON.src = ICONS_LIST[playerIcon];
     PLAYER_PROFILE_NAME.innerHTML = playerName + " (Ти)";
-    ENEMY_PROFILE_ICON.src = `./Icons/icon_${enemyIcon}.png`;
+    ENEMY_PROFILE_ICON.src = ICONS_LIST[enemyIcon];
     ENEMY_PROFILE_NAME.innerHTML = enemyName;
 
     currentTask = allPlayers.players[THIS_PLAYER_INDEX].tasks[0];
 
-    SetUpUI(allPlayers);
+    SetUpUI(allPlayers.players[THIS_PLAYER_INDEX].tasks);
     NewTask(currentTask);
 }
 
-async function SetUpUI(allPlayers) {
-    const TASKS = allPlayers.players[THIS_PLAYER_INDEX].tasks;
-
-    for (let currentChar of TASKS) {
+async function SetUpUI(tasks) {
+    for (let currentChar of tasks) {
         let taskButton = document.createElement("button");
         taskButton.innerText = currentChar;
         taskButton.addEventListener("click", () => NewTask(currentChar));
 
-        resultScoresOnTasks.set(currentChar, 0);
         resultTextOnTasks.set(currentChar, "0/100");
 
         TASK_BUTTONS_FIELD.appendChild(taskButton);

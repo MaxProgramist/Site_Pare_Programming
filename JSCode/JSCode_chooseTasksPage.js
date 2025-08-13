@@ -23,7 +23,6 @@ var cardIsOpen = false;
 SetUpProfiles();
 Loop();
 
-
 async function SetUpProfiles() {
     let allPlayers = await SendPost("RoomManager", "GetAllPlayers", { roomCode: ROOM_CODE });
 
