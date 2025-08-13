@@ -122,7 +122,7 @@ async function SetUpUI(tasks) {
 }
 
 async function NewTask(taskChar) {
-    const CURRENT_NEW_TASK = await SendPost("CPPCompiler", "GetTask", { taskGrade:GRADE_NUM, taskSet:SET_OF_TASKS, task:taskChar });
+    const CURRENT_NEW_TASK = (await SendPost("CPPCompiler", "GetTask", { taskGrade:GRADE_NUM, taskSet:SET_OF_TASKS, task:taskChar })).task;
     const CURRENT_TASK_EXAMPLES = CURRENT_NEW_TASK.examples;
 
     currentTask = taskChar;
@@ -158,7 +158,7 @@ async function NewTask(taskChar) {
     TASK_FIELD.appendChild(taskOutputExplanation);
     TASK_FIELD.appendChild(taskExample_Title);
 
-    for (let currentExampleIndex = 0; currentExampleIndex < CURRENT_TASK_EXAMPLES.length; currentExampleIndex++) {
+    for (let currentExampleIndex = 0; currentExampleIndex < CURRENT_TASK_EXAMPLES; currentExampleIndex++) {
         currentExample = CURRENT_TASK_EXAMPLES[currentExampleIndex];
         let exampleCount = document.createElement("p");
         let exampleInputTitle = document.createElement("span");
