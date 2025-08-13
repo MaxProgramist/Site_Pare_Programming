@@ -80,7 +80,7 @@ async function SomeAsyncFunction() {
         PLAYER_SPAN_LIST_OF_TASKS.appendChild(playerTaskLatter);
         listOfPlayerLetter.push(myCurrentTask);
 
-        let res = await SendPost("RoomManager", "ReceiveTask", { roomCode: ROOM_CODE, playerIndex: THIS_PLAYER_INDEX });
+        let res = await SendPost("RoomManager", "ReceiveTask", { roomCode: ROOM_CODE, playerIndex: parseInt(THIS_PLAYER_INDEX) });
     
         if (res.status != 200) return PopUpWindow(res.description);
     }
