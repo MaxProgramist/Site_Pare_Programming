@@ -118,7 +118,7 @@ function CreateCardWithTask(task, taskPeriod) {
     selectButton.innerHTML = "✓";
     selectButton.setAttribute('class', 'button');
     selectButton.onclick = async function () {
-        let res = await SendPost("RoomManager", "GiveTaskToPlayer", { roomCode: ROOM_CODE, playerIndex: THIS_PLAYER_ENEMY_INDEX, task: taskPeriod });
+        let res = await SendPost("RoomManager", "GiveTaskToPlayer", { roomCode: ROOM_CODE, playerIndex: parseInt(THIS_PLAYER_ENEMY_INDEX), task: taskPeriod });
 
         if (res.status != 200) return PopUpWindow(res.description);
 
