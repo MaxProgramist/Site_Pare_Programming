@@ -66,8 +66,10 @@ async function SomeAsyncFunction() {
     if (allPlayers.players[THIS_PLAYER_INDEX].cardGive) {
         let myCurrentTask = myTasks[myTasks.length-1];
 
-        for (let currentCard in DIV_LIST_OF_CARDS) {
-            if (currentCard.document.getElementById('taskLetter').innerHTML == `<font size="3"> Задача ${myCurrentTask} </font>`) {
+        let cards = DIV_LIST_OF_CARDS.children;
+
+        for (let currentCard of cards) {
+            if (currentCard.querySelector('#taskLetter').innerHTML == `<font size="3"> Задача ${myCurrentTask} </font>`) {
                 currentCard.remove();
                 break;
             }
