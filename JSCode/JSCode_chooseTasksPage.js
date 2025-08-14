@@ -38,7 +38,7 @@ async function SetUpProfiles() {
 async function Loop() {
     while (true) {
         await SomeAsyncFunction();
-        await Delay(250);
+        await Delay(100);
     }
 }
 

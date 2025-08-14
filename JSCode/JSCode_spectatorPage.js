@@ -8,12 +8,18 @@ let playersCircles = [];
 MakePlayersGroups();
 Loop();
 
-
 async function Loop() {
+    let wakeUpCounter = 0;
+
     while (true) {
         await SomeAsyncFunction();
-        await Delay(300);
-        await WakeUpServers();
+        await Delay(100);
+        if (wakeUpCounter >= 200){
+            await WakeUpServers();
+            wakeUpCounter = -1;
+        }
+
+        wakeUpCounter++;
     }
 }
 
