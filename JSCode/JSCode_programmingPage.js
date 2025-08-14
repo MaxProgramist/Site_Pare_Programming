@@ -114,6 +114,7 @@ async function SetUpUI(tasks) {
         let taskButton = document.createElement("button");
         taskButton.innerText = currentChar;
         taskButton.addEventListener("click", () => NewTask(currentChar));
+        taskButton.setAttribute('class', 'button');
 
         resultTextOnTasks.set(currentChar, "0/100");
 
