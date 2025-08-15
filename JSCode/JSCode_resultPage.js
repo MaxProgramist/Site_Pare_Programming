@@ -28,14 +28,14 @@ function SetUpProfiles(allPlayers, roomInfo) {
 
     let playerName = allPlayers[THIS_PLAYER_INDEX].name;
     let enemyName = allPlayers[THIS_ENEMY_INDEX].name;
-    let playerIcon = allPlayers[THIS_PLAYER_INDEX].skin;
-    let enemyIcon = allPlayers[THIS_ENEMY_INDEX].skin;
+    let playerIcon = allPlayers[THIS_PLAYER_INDEX].icon;
+    let enemyIcon = allPlayers[THIS_ENEMY_INDEX].icon;
 
     PLAYER_PROFILE_SCORE.innerHTML = `${playerScore}/${maxPossibleScore}`;
     ENEMY_PROFILE_SCORE.innerHTML = `${enemyScore}/${maxPossibleScore}`;
 
-    PLAYER_PROFILE_ICON.src = `./Icons/icon_${playerIcon}.png`;
+    PLAYER_PROFILE_ICON.src = ICONS_LIST[playerIcon];
     PLAYER_PROFILE_NAME.innerHTML = playerName + " (Ти)";
-    ENEMY_PROFILE_ICON.src = `./Icons/icon_${enemyIcon}.png`;
+    ENEMY_PROFILE_ICON.src = ICONS_LIST[enemyIcon];
     ENEMY_PROFILE_NAME.innerHTML = enemyName;
 }
