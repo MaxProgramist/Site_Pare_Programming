@@ -27,6 +27,7 @@ let currentTask = "A";
 let setUpProfiles = false;
 
 let resultScoresOnTasks = {};
+let resultErrorOnTasks = {};
 let resultTextOnTasks = new Map();
 let codeOnTasks = new Map();
 
@@ -57,8 +58,9 @@ async function SomeAsyncFunction() {
     myTasks = allPlayers.players[THIS_PLAYER_INDEX].tasks;
     enemyTasks = allPlayers.players[THIS_ENEMY_INDEX].tasks;
     resultScoresOnTasks = allPlayers.players[THIS_PLAYER_INDEX].scoreOnTask;
+    resultErrorOnTasks = allPlayers.players[THIS_PLAYER_INDEX].errorOnTask;
 
-    RESULT_FIELD.innerText = resultScoresOnTasks[currentTask] + "/100";
+    RESULT_FIELD.innerText = ((resultErrorOnTasks == "") ? resultErrorOnTasks :resultScoresOnTasks[currentTask] + "/100");
     resultTextOnTasks[currentTask] = resultScoresOnTasks[currentTask];
 
     SetUpProfiles(allPlayers, roomInfo);
