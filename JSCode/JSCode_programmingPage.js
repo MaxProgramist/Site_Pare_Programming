@@ -53,6 +53,9 @@ async function SomeAsyncFunction() {
     if (allPlayers.status != 200) PopUpWindow(allPlayers.description);
     if (roomInfoPost.status != 200) PopUpWindow(roomInfoPost.description);
 
+    console.log(resultScoresOnTasks);
+    console.log(resultErrorOnTasks);
+
     SetTimer(roomInfo);
 
     myTasks = allPlayers.players[THIS_PLAYER_INDEX].tasks;
