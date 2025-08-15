@@ -13,22 +13,23 @@ Start();
 
 async function Start() {
     let allPlayers = await SendPost("RoomManager", "GetAllPlayers", { roomCode: ROOM_CODE });
-    let roomInfo = await SendPost("RoomManager", "GetRoomInfo", { roomCode: ROOM_CODE });
+    let roomInfoPost = await SendPost("RoomManager", "GetRoomInfo", { roomCode: ROOM_CODE });
+    let roomInfo = roomInfoPost.roomInfo;
 
     if (allPlayers.status == 404 && allPlayers.description == "No room with this code!") window.location.href = "index.html";
 
-    SetUpProfiles(allPlayers, roomInfo);
+    SetUpProfiles(allPlayers.players, roomInfo);
 }
 
 function SetUpProfiles(allPlayers, roomInfo) {
-    let playerScore = allPlayers.players[THIS_PLAYER_INDEX].score;
-    let enemyScore = allPlayers.players[THIS_ENEMY_INDEX].score;
+    let playerScore = allPlayers[THIS_PLAYER_INDEX].score;
+    let enemyScore = allPlayers[THIS_ENEMY_INDEX].score;
     let maxPossibleScore = roomInfo.maxTasks * 100;
 
-    let playerName = allPlayers.players[THIS_PLAYER_INDEX].name;
-    let enemyName = allPlayers.players[THIS_ENEMY_INDEX].name;
-    let playerIcon = allPlayers.players[THIS_PLAYER_INDEX].skin;
-    let enemyIcon = allPlayers.players[THIS_ENEMY_INDEX].skin;
+    let playerName = allPlayers[THIS_PLAYER_INDEX].name;
+    let enemyName = allPlayers[THIS_ENEMY_INDEX].name;
+    let playerIcon = allPlayers[THIS_PLAYER_INDEX].skin;
+    let enemyIcon = allPlayers[THIS_ENEMY_INDEX].skin;
 
     PLAYER_PROFILE_SCORE.innerHTML = `${playerScore}/${maxPossibleScore}`;
     ENEMY_PROFILE_SCORE.innerHTML = `${enemyScore}/${maxPossibleScore}`;
