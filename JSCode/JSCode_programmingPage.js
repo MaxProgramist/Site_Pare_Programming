@@ -60,7 +60,7 @@ async function SomeAsyncFunction() {
     resultScoresOnTasks = allPlayers.players[THIS_PLAYER_INDEX].scoreOnTask;
     resultErrorOnTasks = allPlayers.players[THIS_PLAYER_INDEX].errorOnTask;
 
-    RESULT_FIELD.innerText = ((resultErrorOnTasks == "") ? resultErrorOnTasks :resultScoresOnTasks[currentTask] + "/100");
+    RESULT_FIELD.innerText = ((resultErrorOnTasks[currentTask] == "") ? resultErrorOnTasks[currentTask] : (resultScoresOnTasks[currentTask] + "/100"));
     resultTextOnTasks[currentTask] = resultScoresOnTasks[currentTask];
 
     SetUpProfiles(allPlayers, roomInfo);
