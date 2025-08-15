@@ -58,7 +58,8 @@ async function SomeAsyncFunction() {
     enemyTasks = allPlayers.players[THIS_ENEMY_INDEX].tasks;
     resultScoresOnTasks = allPlayers.players[THIS_PLAYER_INDEX].scoreOnTask;
 
-    RESULT_FIELD.innerText = resultScoresOnTasks[currentTask];
+    RESULT_FIELD.innerText = resultScoresOnTasks[currentTask] + "/100";
+    resultTextOnTasks[currentTask] = resultScoresOnTasks[currentTask];
 
     SetUpProfiles(allPlayers, roomInfo);
 }
