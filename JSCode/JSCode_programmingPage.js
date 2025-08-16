@@ -56,7 +56,7 @@ async function SomeAsyncFunction() {
     console.log(resultScoresOnTasks);
     console.log(allPlayers.players[THIS_PLAYER_INDEX].scoreOnTask);
     console.log(resultErrorOnTasks);
-    console.log(layers.players[THIS_PLAYER_INDEX].errorOnTask);
+    console.log(allPlayers.players[THIS_PLAYER_INDEX].errorOnTask);
 
     SetTimer(roomInfo);
 
